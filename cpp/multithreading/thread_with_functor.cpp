@@ -1,10 +1,12 @@
 #include<iostream>
 #include<thread>
+#include <mutex>
 
+std::mutex m;
 
 void thread_function()
 {
-    // stupid thread function
+	m.lock();
 
 }
 
