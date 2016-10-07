@@ -1,38 +1,23 @@
-#include<iostream>
-#include<thread>
+#include <iostream>
 #include <mutex>
+#include <thread>
 
 std::mutex m;
 
-void thread_function()
-{
-	m.lock();
+void thread_function() { m.lock(); }
 
-}
-
-
-class Functor
-{
-    public:
-        void operator ()()
-        {
-            std::cout << "This is functor " << std::endl;
-        }
-
+class Functor {
+ public:
+  void operator()() { std::cout << "This is functor " << std::endl; }
 };
 
-int main()
-{
+int main() {
+  // standard way to create a thread
+  std::thread thread_with_thread_function(thread_function);
+  thread_with_thread_function.join();
 
-    // standard way to create a thread
-    std::thread thread_with_thread_function(thread_function);
-    thread_with_thread_function.join();
-
-
-    // thread with functor
-    Functor f;
-    std::thread thread_with_functor(f);
-    thread_with_functor.join();
-   
+  // thread with functor
+  Functor f;
+  std::thread thread_with_functor(f);
+  thread_with_functor.join();
 }
-
