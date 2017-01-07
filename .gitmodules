@@ -1,0 +1,6 @@
+[submodule "git_projects/CMake"]
+	path = git_projects/CMake
+	url = https://github.com/Kitware/CMake.git
+[submodule "git_projects/llvm"]
+	path = git_projects/llvm
+	url = https://github.com/llvm-mirror/llvm.git
