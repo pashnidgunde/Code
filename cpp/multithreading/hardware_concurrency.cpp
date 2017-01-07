@@ -16,7 +16,7 @@ int main()
     
     // print main thread's id
     std::cout << "Hardware Concurrancy, Gives number of cores. This can decide how many threads we can run  : " 
-              << std::thread::hardware_concurrency();
+              << std::thread::hardware_concurrency() << std::endl;
 
     t1.join();
 }
