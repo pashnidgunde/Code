@@ -1,6 +1,6 @@
 #include <iostream>
 #include <thread>
-#include <fstream>
+#include <sstream>
 
 std::string very_long_string="";
 using namespace std;

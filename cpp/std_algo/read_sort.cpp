@@ -22,4 +22,6 @@ int main()
     std::copy(strs.begin(),strs.end(),std::ostream_iterator<std::string> ( std::cout,"\n"));
 
     return 0;
+
+    
 }
