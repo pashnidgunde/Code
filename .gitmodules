@@ -1,0 +1,9 @@
+[submodule "cpp/git/clang"]
+	path = git/clang
+	url = https://github.com/llvm-mirror/clang.git
+[submodule "cpp/git/llvm"]
+	path = git/llvm
+	url = https://github.com/llvm-mirror/llvm.git
+[submodule "cpp/git/CMake"]
+	path = git/CMake
+	url = https://github.com/Kitware/CMake.git
