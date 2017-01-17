@@ -4,3 +4,6 @@
 [submodule "git_projects/llvm"]
 	path = git_projects/llvm
 	url = https://github.com/llvm-mirror/llvm.git
+[submodule "git_projects/vscode"]
+	path = git_projects/vscode
+	url = https://github.com/Microsoft/vscode.git
