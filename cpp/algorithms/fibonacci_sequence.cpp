@@ -8,17 +8,18 @@
 #include <iostream>
 
 void Fibonacci(int num) {
-  if (num < 2) {
-    if (num == 0) {
-      std::cout << " 0 ";
-    }
-    if (num == 1) {
-      std::cout << " 0 "
-                << " 1 ";
-    }
+  int num1 = 0, num2 = 1, result = 0;
 
-    int num1 = 0, num2 = 0;
-    for (int) }
+  for (int i = 0; i < num; i++) {
+    if (i < 2) {
+      result = i;
+    } else {
+      result = num1 + num2;
+      num1 = num2;
+      num2 = result;
+    }
+    std::cout << result << ",";
+  }
 }
 
 int main() {
