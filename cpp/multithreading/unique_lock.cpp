@@ -46,7 +46,6 @@ void thread_function()
 
 }
 
-
 int main()
 {
 
@@ -54,6 +53,4 @@ int main()
 
 	std::thread t (thread_function);
 	t.join();
-
-
 }

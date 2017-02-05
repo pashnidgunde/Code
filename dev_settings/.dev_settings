@@ -1,0 +1,21 @@
+export PATH=/home/pnidgunde/Code/git_projects/llvm/install/bin:$PATH
+export PATH=/home/pnidgunde/Code/git_projects/cmake/install/bin:$PATH
+export PATH=/home/pnidgunde/Code/git_projects/vim/src/install/bin:$PATH
+export PATH=/home/pnidgunde/Code/git_projects/screen/src/install/bin:$PATH
+
+# Z-lib ( For clang )
+export LIBRARY_PATH=/home/pnidgunde/Code/git_projects/zlib/install/lib:$LIBRARY_PATH
+#export PATH=/home/pnidgunde/Code/git_projects/zlib/install/lib:$PATH
+
+# CLANG FORMAT
+export PATH=/home/pnidgunde/Code/git_projects/llvm/install/bin:$PATH
+
+# Aliases settings
+alias g++='/usr/bin/g++ -std=c++11 -Wall -Werror '
+alias c='clear'
+alias l='ls -ltr'
+
+parse_git_branch() {
+     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+export PS1="\u@\h \[\033[32m\]\$PWD\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "
