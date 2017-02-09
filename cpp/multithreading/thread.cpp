@@ -1,5 +1,6 @@
 #include <thread>
 #include <string>
+#include <iostream>
 
 
 void fun()
@@ -43,10 +44,11 @@ int main()
 {
     // This is fine
     std::thread t1 = std::thread (fun);
+    t1.join();
 
     // This will not compile , because 
     // thread(thread&) = delete;
-    std::thread t2 = t1;
+    //std::thread t2 = t1;
         
     // print main thread's id
     std::cout << "Main thread id : " << std::this_thread::get_id() << std::endl;
@@ -77,5 +79,9 @@ int main()
 
     // Lets wait for thread to finish
     thread_with_functor_accepts_ref.join();
-    t1.join();
+    
+    // thread with lambda function
+    std::thread lambda_thread ( [] () { std::cout << "Thread with lambda function" << std::endl; });
+    lambda_thread.join();
+
 }
