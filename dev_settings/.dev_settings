@@ -11,7 +11,7 @@ export LIBRARY_PATH=/home/pnidgunde/Code/git_projects/zlib/install/lib:$LIBRARY_
 export PATH=/home/pnidgunde/Code/git_projects/llvm/install/bin:$PATH
 
 # Aliases settings
-alias g++='/usr/bin/g++ -std=c++11 -Wall -Werror '
+alias g++='/usr/bin/g++ -g -std=c++11 -Wall -Werror '
 alias c='clear'
 alias l='ls -ltr'
 
