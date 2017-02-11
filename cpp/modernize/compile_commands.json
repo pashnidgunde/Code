@@ -1,0 +1,7 @@
+[
+  {
+    "directory": "/home/pnidgunde/Code/cpp/modernize",
+    "command": "/usr/bin/g++ -c -o nullptr.o nullptr.cpp",
+    "file": "nullptr.cpp"
+  }
+]

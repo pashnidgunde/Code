@@ -1,11 +1,12 @@
 //Template that accepts auto
 
 #include <iostream>
+#include <typeinfo>
 
 template < class T>
 void fun(T a)
 {
-    std::cout << a << std::endl;
+    std::cout << typeid(a).name() << " " << a << std::endl;
 }
 
 
