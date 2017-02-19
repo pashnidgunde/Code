@@ -1,3 +1,4 @@
+#include <functional>
 #include <iostream>
 #include <string>
 
@@ -22,7 +23,7 @@ public:
   //  other.ptr = nullptr;
   //}
 
-  MyVector(MyVector &other) : size(0), ptr(nullptr) { this->swap(other); }
+  MyVector(MyVector &&other) : size(0), ptr(nullptr) { this->swap(other); }
 
   // Copy assing operator
   // Old style
@@ -58,11 +59,12 @@ std::string getHello() { return "Hello"; }
 int main() {
 
   int x = 0; // L values x and k
-
+  int y = 100;
   // *************Lvalue reference to x
   int &volatile_lvalue_reference = x;
-  volatile_lvalue_reference = 100; // Possible changing value
-  // int &volatile_lvalue_reference = 100 // Can't reference to R value
+
+  volatile_lvalue_reference = 100;         // Possible changing value
+  volatile_lvalue_reference = std::ref(y); // Can't reference to R value
 
   // const lvalue reference pointing to rvalue 0
   const int &const_lvalue_reference = 0;
