@@ -12,6 +12,7 @@ export PATH=/home/pnidgunde/Code/git_projects/llvm/install/bin:$PATH
 
 # Aliases settings
 alias g++='/usr/bin/g++ -g -std=c++11 -Wall -Werror '
+alias gdb='/usr/bin/gdb -tui'
 alias c='clear'
 alias l='ls -ltr'
 
