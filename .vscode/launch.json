@@ -1,69 +1,17 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "C++ Launch",
-            "type": "cppdbg",
-            "request": "launch",
-            "program": "/home/pnidgunde/Code/cpp/data_types/a.out",
-            "args": [],
-            "stopAtEntry": false,
-            "cwd": "/home/pnidgunde/Code/cpp/data_types/",
-            "environment": [],
-            "externalConsole": false,
-            "linux": {
-                "MIMode": "gdb",
-                "setupCommands": [
-                    {
-                        "description": "Enable pretty-printing for gdb",
-                        "text": "-enable-pretty-printing",
-                        "ignoreFailures": true
-                    }
-                ]
-            },
-            "osx": {
-                "MIMode": "lldb"
-            },
-            "windows": {
-                "MIMode": "gdb",
-                "setupCommands": [
-                    {
-                        "description": "Enable pretty-printing for gdb",
-                        "text": "-enable-pretty-printing",
-                        "ignoreFailures": true
-                    }
-                ]
-            }
-        },
-        {
-            "name": "C++ Attach",
-            "type": "cppdbg",
-            "request": "attach",
-            "program": "/home/pnidgunde/Code/cpp/data_types/a.out",
-            "processId": "${command.pickProcess}",
-            "linux": {
-                "MIMode": "gdb",
-                "setupCommands": [
-                    {
-                        "description": "Enable pretty-printing for gdb",
-                        "text": "-enable-pretty-printing",
-                        "ignoreFailures": true
-                    }
-                ]
-            },
-            "osx": {
-                "MIMode": "lldb"
-            },
-            "windows": {
-                "MIMode": "gdb",
-                "setupCommands": [
-                    {
-                        "description": "Enable pretty-printing for gdb",
-                        "text": "-enable-pretty-printing",
-                        "ignoreFailures": true
-                    }
-                ]
-            }
-        }
+    "version": "0.1.0",
+    "configurations": [],
+    "name": "Python",
+    "type": "python",
+    "pythonPath": "/usr/bin/python3",
+    "request": "launch",
+    "stopOnEntry": true,
+    "console": "none",
+    "program": "${file}",
+    "cwd": "/home/pnidgunde/Code/python",
+    "debugOptions": [
+        "WaitOnAbnormalExit",
+        "WaitOnNormalExit",
+        "RedirectOutput"
     ]
 }

@@ -1,7 +1,7 @@
 [
   {
     "directory": "/home/pnidgunde/Code/cpp/modernize",
-    "command": "/usr/bin/g++ -c -o nullptr.o nullptr.cpp",
-    "file": "nullptr.cpp"
+    "command": "g++ -c -std=c++11 -o stack.o stack.cpp",
+    "file": "stack.cpp"
   }
 ]
