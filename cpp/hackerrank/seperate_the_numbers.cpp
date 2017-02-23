@@ -4,10 +4,10 @@
 #include <sstream>
 #include <string>
 
-std::string to_string(int number) {
+int number_of_digits(int number) {
   std::stringstream s;
   s << number;
-  return s.str();
+  return s.str().size();
 }
 
 int main() {
@@ -19,43 +19,36 @@ int main() {
 
     std::cin >> str;
 
-    auto offset = 1;
     auto in_sequence = false;
-    while (d < str.size() / 2) {
+
+    for (auto offset = 1; (offset < str.size() / 2 || in_sequence != true);
+         ++offset) {
       auto index = 0;
       auto number = atoi(str.substr(index, offset).c_str());
+      auto number_to_print = number;
+      auto next_number_length = 0;
 
-      while (1) {
+      while ((index + offset + next_number_length) < str.size()) {
         auto next_number = number + 1;
-        auto next_number_str = to_string(next_number);
-        auto next_number_length = next_number_str.size();
+        auto next_number_length = number_of_digits(next_number);
+        auto next_number_from_str =
+            atoi(str.substr(index + offset, next_number_length).c_str());
 
-        if ((index + offset + next_number_length) > str.size()) {
+        if (next_number_from_str != next_number) {
+          in_sequence = false;
+          std::cout << "NO" << std::endl;
           break;
-        } else {
-          std::string next_substr =
-              str.substr(index + offset, next_number_length);
-          if (next_substr == next_number_str) {
-            in_sequence = true;
-            number = next_number;
-            index = index + next_substr.size();
-          } else {
-            in_sequence = false;
-            break;
-          }
         }
+
+        in_sequence = true;
+        number = next_number;
+        index = index + next_number_length;
       }
 
-      if (false == in_sequence) {
-        d += 1;
-      } else {
-        in_sequence = true;
+      if (in_sequence) {
+        std::cout << "YES" << number_to_print << std::endl;
         break;
       }
-    }
-
-    if (in_sequence) {
-      std::cout << "YES";
     }
   }
 }
