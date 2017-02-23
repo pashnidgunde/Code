@@ -7,7 +7,7 @@
     "args": [
         "-std=c++11",
         "-g",
-        "stack.cpp"
+        "seperate_the_numbers.cpp"
     ],
     "showOutput": "always"
 }
