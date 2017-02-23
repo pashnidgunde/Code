@@ -12,17 +12,19 @@ int number_of_digits(int number) {
 
 int main() {
 
-  auto number_of_strings = 0;
-  std::cin >> number_of_strings;
+  // auto number_of_strings = 0;
+  // std::cin >> number_of_strings;
+  auto number_of_strings = 1;
+  std::string str;
 
   for (auto i = 0; i < number_of_strings; i++) {
 
-    std::cin >> str;
+    // std::cin >> str;
+    str = "99100";
 
     auto in_sequence = false;
 
-    for (auto offset = 1; (offset < str.size() / 2 || in_sequence != true);
-         ++offset) {
+    for (size_t offset = 1; offset <= (str.size() / 2); ++offset) {
       auto index = 0;
       auto number = atoi(str.substr(index, offset).c_str());
       auto number_to_print = number;
@@ -36,7 +38,6 @@ int main() {
 
         if (next_number_from_str != next_number) {
           in_sequence = false;
-          std::cout << "NO" << std::endl;
           break;
         }
 
@@ -46,9 +47,12 @@ int main() {
       }
 
       if (in_sequence) {
-        std::cout << "YES" << number_to_print << std::endl;
+        std::cout << "YES"
+                  << " " << number_to_print << std::endl;
         break;
       }
     }
+    if (!in_sequence)
+      std::cout << "NO" << std::endl;
   }
 }
