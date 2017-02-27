@@ -1,1 +1,0 @@
-../hackerrank/cpp/stack.cpp
