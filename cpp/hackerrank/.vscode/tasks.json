@@ -1,7 +1,5 @@
 {
     "version": "0.1.0",
-    
-           
     "linux": {
         "version": "0.1.0",
         "command": "/usr/bin/g++",
@@ -26,4 +24,3 @@
         "showOutput": "always"
     }
 }
-    
