@@ -9,7 +9,8 @@
         "args": [
             "-std=c++11",
             "-g",
-            "seperate_the_numbers.cpp"
+            "-Wall",
+            "max_unique_subarray.cpp"
         ],
         "showOutput": "always"
     },
@@ -20,7 +21,7 @@
         "command": "C:\\MinGw\\bin\\g++",
         "isShellCommand": true,
         // compiles and links with debugger information
-        "args": ["-g", "-std=c++11", "-o", "a.out", "pair_in_array.cpp"],
+        "args": ["-g", "-Wall", "-std=c++11", "-o", "a.out", "max_unique_subarray.cpp"],
         // without debugger information
         // "args": ["-o", "hello.exe", "hello.cpp"],
         "showOutput": "always"
