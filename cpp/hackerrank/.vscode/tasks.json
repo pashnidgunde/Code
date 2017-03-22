@@ -21,7 +21,7 @@
         "command": "C:\\MinGw\\bin\\g++",
         "isShellCommand": true,
         // compiles and links with debugger information
-        "args": ["-g", "-Wall", "-std=c++11", "-o", "a.out", "max_unique_subarray.cpp"],
+        "args": ["-g", "-Wall", "-std=c++11", "-o", "a.out", "max_unique_subarray_equal_0_and_1.cpp"],
         // without debugger information
         // "args": ["-o", "hello.exe", "hello.cpp"],
         "showOutput": "always"
