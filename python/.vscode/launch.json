@@ -171,7 +171,7 @@
             "remoteRoot": "${workspaceRoot}",
             "port": 3000,
             "secret": "my_secret",
-            "host": "localhost",
+            "host": "localhost"
         }
     ]
 }
