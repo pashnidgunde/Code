@@ -25,13 +25,13 @@ def max_product_in_range_faster(numbers):
         if ((i != max_index) and (numbers[i] > numbers[max_index1])):
             max_index1 = i
 
-    return numbers[max_index] * numbers[max_index1]
-
+    print (numbers[max_index] * numbers[max_index1])
+    
 # Main begins here
 n =  int(input().strip())
 numbers = [int(x) for x in input().split()]
 #print (max_product_in_range(numbers))
-print (max_product_in_range_faster(numbers))
+max_product_in_range_faster(numbers)
         
 
 

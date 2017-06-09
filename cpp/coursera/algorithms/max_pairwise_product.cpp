@@ -6,13 +6,14 @@ using std::cin;
 using std::cout;
 
 // Naive solution
-int MaxPairwiseProduct(const vector<int> &numbers) {
-  int result = 0;
+long long MaxPairwiseProduct(const vector<int> &numbers) {
+  long long result = 0;
   int n = numbers.size();
   for (int i = 0; i < n; ++i) {
     for (int j = i + 1; j < n; ++j) {
-      if (numbers[i] * numbers[j] > result) {
-        result = numbers[i] * numbers[j];
+      auto temp = (long long) (numbers[i]) * numbers[j];
+      if ( temp > result) {
+        result = temp;
       }
     }
   }
@@ -49,6 +50,7 @@ long long MaxPairwiseProductFast(const std::vector<int> &numbers) {
   return ((long long)(numbers[max_index1]) * numbers[max_index2]);
 }
 
+/*
 int main() {
   int n;
   cin >> n;
@@ -59,5 +61,39 @@ int main() {
 
   auto result = MaxPairwiseProductFast(numbers);
   cout << result << "\n";
+  return 0;
+}
+*/
+
+// This is the implementation of the stres test
+int main() {
+  while (true) {
+    auto n = rand() % 10 + 2;
+    std::vector<int> numbers;
+    for (auto i = 0; i < n; i++) {
+      numbers.emplace_back(rand());
+    }
+
+    long long number1 = MaxPairwiseProductFast(numbers);
+    long long number2 = MaxPairwiseProduct(numbers);
+
+    if ( number1 != number2 ) {
+      std::cout << "Failed" << std::endl;
+      std::cout << "N :: " << n << std::endl;
+      std::cout << "Numbers ::" << std::endl;
+      
+      for (const auto &number : numbers) {
+        std::cout << number << " " << std::endl;
+      }
+
+      std::cout << "Number 1 :: " << number1 << std::endl;
+      std::cout << "Number 2 :: " << number2 << std::endl;
+
+      break;
+    } else {
+      std::cout << "PASS" << std::endl;
+    }
+  }
+
   return 0;
 }
