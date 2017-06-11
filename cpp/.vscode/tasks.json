@@ -10,7 +10,7 @@
             "-Wall",
             "-Wextra",
             "-Werror",
-            "./coursera/algorithms/factorial.cpp"
+            "./coursera/algorithms/gcd.cpp"
         ],
         "showOutput": "always"
     },
