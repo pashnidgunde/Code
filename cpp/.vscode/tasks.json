@@ -5,9 +5,14 @@
         "command": "/usr/bin/g++",
         "isShellCommand": true,
         "args": [
-            "-std=c++11",
+            "-std=c++14",
             "-g",
-            "seperate_the_numbers.cpp"
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-pipe",
+            "-O2",
+            "./coursera/algorithms/Week2/lcm.cpp"
         ],
         "showOutput": "always"
     },
@@ -18,7 +23,13 @@
         "command": "C:\\MinGw\\bin\\g++",
         "isShellCommand": true,
         // compiles and links with debugger information
-        "args": ["-g", "-std=c++11", "-o", "a.out", "pair_in_array.cpp"],
+        "args": [
+            "-g",
+            "-std=c++11",
+            "-o",
+            "./containers/a.out",
+            "pair_in_array.cpp"
+        ],
         // without debugger information
         // "args": ["-o", "hello.exe", "hello.cpp"],
         "showOutput": "always"

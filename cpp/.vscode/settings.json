@@ -1,6 +1,28 @@
 {
     "files.associations": {
-        "*h*h*h*h*harray": "cpp",
-        "array": "cpp"
-    }
+        "__config": "cpp",
+        "initializer_list": "cpp",
+        "stdexcept": "cpp",
+        "typeinfo": "cpp",
+        "new": "cpp",
+        "exception": "cpp",
+        "__nullptr": "cpp",
+        "*h*h*h*h*h*h*h*h*h*h*h*h*h*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*h*h*h*iivector": "cpp",
+        "*h*h*h*hvector": "cpp",
+        "*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*h*h*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*h*h*cpp*h*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*h*h*h*h*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*inc*h*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*h*h*h*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp*h*h*h*h*h*h*h*halgorithm": "cpp",
+        "*h*h*h*h*h__config": "cpp",
+        "optional": "cpp",
+        "*hstdexcept": "cpp",
+        "dynarray": "cpp",
+        "*h*h*h*h*h*h*h*h*h*h*h*h*h*halgorithm": "cpp",
+        "*h*cpp*cpp*cc*cc*cc*cc*cc*cc*h*h*h*h*h*h*h*cpp*hpp*cpp*cpp*cpp*cpp*cppany": "cpp",
+        "variant": "cpp",
+        "*h*h*cpp*cpp*cpp*cpp*cpp*cpp*h*h*h*h*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp__config": "cpp",
+        "*cpp*cpp*cpp*cpp*cpp*cpp*h*h*halgorithm": "cpp"
+    },
+    "editor.formatOnSave": true,
+    "clang-format.executable": "/home/pnidgunde/Code/git_projects/llvm/install/bin/clang-format",
+    "C_Cpp.clang_format_formatOnSave": true,
+    "editor.formatOnType": true,
+    "clang-format.style": "/home/pnidgunde/Code/cpp/.clang-format"
 }
