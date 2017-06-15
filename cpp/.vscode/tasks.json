@@ -10,7 +10,9 @@
             "-Wall",
             "-Wextra",
             "-Werror",
-            "./coursera/algorithms/gcd.cpp"
+            "-pipe",
+            "-O2",
+            "./coursera/algorithms/Week2/lcm.cpp"
         ],
         "showOutput": "always"
     },

@@ -10,7 +10,7 @@ int fibonacci_recursive(int n) {
 }
 
 // Efficient Algorithm
-int fibonacci_nonrecursive(int n) {
+long long fibonacci_nonrecursive(int n) {
   long long prev = 0;
   long long curr = 1;
   long long fib = 0;
