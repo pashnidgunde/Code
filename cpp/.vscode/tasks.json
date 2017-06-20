@@ -11,8 +11,7 @@
             "-Wextra",
             "-Werror",
             "-pipe",
-            "-O2",
-            "./coursera/algorithms/Week2/lcm.cpp"
+            "./algorithms/sorting/merge_sort.cpp"
         ],
         "showOutput": "always"
     },
