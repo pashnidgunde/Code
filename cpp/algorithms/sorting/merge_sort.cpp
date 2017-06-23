@@ -1,3 +1,4 @@
+
 #include "functors.h"
 #include <iostream>
 #include <vector>
@@ -65,3 +66,4 @@ int main() {
   getchar();
   return 0;
 }
+
