@@ -1,16 +1,18 @@
 {
     "version": "0.1.0",
-    
-           
     "linux": {
         "version": "0.1.0",
         "command": "/usr/bin/g++",
         "isShellCommand": true,
         "args": [
-            "-std=c++11",
+            "-std=c++14",
             "-g",
             "-Wall",
-            "max_unique_subarray.cpp"
+            "-Wextra",
+            "-Werror",
+            "-pipe",
+            "-O2",
+            "./coursera/algorithms/Week2/lcm.cpp"
         ],
         "showOutput": "always"
     },
@@ -21,10 +23,20 @@
         "command": "C:\\MinGw\\bin\\g++",
         "isShellCommand": true,
         // compiles and links with debugger information
-        "args": ["-g", "-Wall", "-std=c++11", "-o", "a.out", "max_unique_subarray_equal_0_and_1.cpp"],
+        "args": [
+            "-g",
+            "-std=c++14",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-pipe",
+            "-O0",
+            "-o",
+            "./a.out",
+            "./algorithms/sorting/heap_sort.cpp"
+        ],
         // without debugger information
         // "args": ["-o", "hello.exe", "hello.cpp"],
         "showOutput": "always"
     }
 }
-    
