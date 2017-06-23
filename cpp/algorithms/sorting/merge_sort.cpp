@@ -1,76 +1,69 @@
+
+#include "functors.h"
 #include <iostream>
 #include <vector>
-//#include <algorithm>
 
-namespace algorithm
-{
-    template <typename T>
-    struct less
-    {
-        bool operator()(const T& lhs, const T& rhs) const
-        {
-            return lhs < rhs;
-        }
-    };
+template <typename T> void print(const std::vector<T> &v) {
+  for (const auto &e : v)
+    std::cout << e;
 
-    template <typename T>
-    struct greater
-    {
-        bool operator()(const T& lhs, const T& rhs) const
-        {
-            return lhs > rhs;
-        }
-    };
+  std::cout << std::endl;
 }
 
+// Merge sort works on divide and conquer
+// So we have to first divide the list to an extent that one element can be
+// compared against another
 
+template <typename T, typename O>
+void merge(std::vector<T> &arr, int l, int m, int h, O op) {
+  // Need to have seperate arrays, so that after comparison we can put the right
+  // element in the vector
+  const std::vector<T> lower_arr(arr.begin() + l, arr.begin() + m + 1);
+  const std::vector<T> higher_arr(arr.begin() + m + 1, arr.begin() + h + 1);
 
+  // iterators for lower , higher and actual result vectors
+  size_t i = 0, j = 0, k = l;
 
-void print(const std::vector<int>& v)
-{
-    for (const auto& e : v)
-        std::cout << e << " " ;
-    std::cout << std::endl;
+  // compare elements
+  while (i < lower_arr.size() && j < higher_arr.size()) {
+    arr[k++] =
+        // Note use of operator( less and greater )
+        op(lower_arr[i], higher_arr[j]) ? lower_arr[i++] : higher_arr[j++];
+  }
+
+  // check if any element exists in the first vector
+  while (i < lower_arr.size()) {
+    arr[k++] = lower_arr[i++];
+  }
+
+  // check if element exists in the second vector
+  while (j < higher_arr.size()) {
+    arr[k++] = higher_arr[j++];
+  }
 }
 
-void merge(std::vector<int>&numbers, int l , int mid, int r  )
-{
-    
+// This function divides the arr to smallest magnitude
+// Once divided , merge it back
+template <typename T, typename O>
+void sort(std::vector<T> &arr, int l, int h, O op) {
+  if (l < h) {
+    // Mid ( considers overflow of numbers)
+    auto m = l + (h - l) / 2;
+
+    sort(arr, l, m, op);
+    sort(arr, m + 1, h, op);
+
+    merge(arr, l, m, h, op);
+  }
 }
 
-// The operator tells the what is to be compared.
-// Operator less or greater
-template<typename T>
-void sort(std::vector<T>& numbers, int l , int r)
-{
-    if ( l == r ) return;
-    //auto mid = (l+r) / 2
-    // This is to avoid overflow
-    auto mid = (l + (r-l) / 2);
-
-    sort(numbers, l, mid);
-    sort(numbers, mid+1, r);
-
-    return merge(numbers, l, mid, r);
+int main() {
+  std::vector<int> arr{0, 1, 2, 3, 4, 5, 5, 6, 7, 8, 9};
+  sort(arr, 0, arr.size() - 1, pn::functors::greater<int>());
+  print(arr);
+  sort(arr, 0, arr.size() - 1, pn::functors::less<int>());
+  print(arr);
+  getchar();
+  return 0;
 }
 
-int main()
-{
-    std::vector<int> v {10,9,8};
-    //std::vector<int> v { 10,9,8,7,6,5,4,3,2,1};
-
-    // Sort using standard comparator less
-    //sort(v,std::less<int>());
-    sort(v, 0, v.size() -1 );
-    print(x);
-    
-
-    // Sort using standard comparator greater
-    //sort(v,std::greater<int>()); 
-    //sort(v,algorithm::greater<int>());   
-    //for (const auto& e : v)
-    //    std::cout << e << " " ;
-
-    return 0;
-
-}

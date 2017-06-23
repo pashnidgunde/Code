@@ -13,7 +13,6 @@ from operator import truediv
 
 def get_optimal_value(capacity, weights, values):
     
-    
     # Divide two arrays 
     # Courtesy : https://stackoverflow.com/questions/16418415/divide-two-lists-in-python
 
@@ -21,18 +20,18 @@ def get_optimal_value(capacity, weights, values):
 
     # This will return indexes of sorted elements
     # Courtesy : https://stackoverflow.com/questions/6422700/how-to-get-indices-of-a-sorted-array-in-python
-    # To sort in reverse order use reversed = true 
+    # To sort in reverse order use reverse = true 
     sorted_indexes = [i[0] for i in sorted(enumerate(value_per_weight), key=lambda x:x[1], reverse = True)]
 
     value = 0.
-    
     i = 0
     
     while(capacity > 0):
-        value += weights[sorted_indexes[i]] * value_per_weight[i]
+        value += weights[sorted_indexes[i]] * value_per_weight[sorted_indexes[i]]
         capacity -= weights[i]
+        i+=1
 
-        return value
+    return value
 
 # ===================== List Slicing     =========================================
 
@@ -64,4 +63,4 @@ if __name__ == "__main__":
 
     opt_value = get_optimal_value(capacity, weights, values)
     
-    print("{:.10f}".format(opt_value))
+    print("{:.4f}".format(opt_value))
