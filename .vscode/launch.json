@@ -1,0 +1,17 @@
+{
+    "version": "0.1.0",
+    "configurations": [],
+    "name": "Python",
+    "type": "python",
+    "pythonPath": "/usr/bin/python3",
+    "request": "launch",
+    "stopOnEntry": true,
+    "console": "none",
+    "program": "${file}",
+    "cwd": "/home/pnidgunde/Code/python",
+    "debugOptions": [
+        "WaitOnAbnormalExit",
+        "WaitOnNormalExit",
+        "RedirectOutput"
+    ]
+}
