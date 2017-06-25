@@ -1,0 +1,41 @@
+{
+    "version": "0.1.0",
+    "linux": {
+        "version": "0.1.0",
+        "command": "/usr/bin/g++",
+        "isShellCommand": true,
+        "args": [
+            "-std=c++14",
+            "-g",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-pipe",
+            "./algorithms/sorting/insertion_sort.cpp"
+        ],
+        "showOutput": "always"
+    },
+    "osx": {
+        "MIMode": "lldb"
+    },
+    "windows": {
+        "command": "C:\\MinGw\\bin\\g++",
+        "isShellCommand": true,
+        // compiles and links with debugger information
+        "args": [
+            "-g",
+            "-std=c++14",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-pipe",
+            "-O0",
+            "-o",
+            "./a.out",
+            "./algorithms/sorting/heap_sort.cpp"
+        ],
+        // without debugger information
+        // "args": ["-o", "hello.exe", "hello.cpp"],
+        "showOutput": "always"
+    }
+}
