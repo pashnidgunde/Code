@@ -11,7 +11,7 @@
             "-Wextra",
             "-Werror",
             "-pipe",
-            "./algorithms/sorting/insertion_sort.cpp"
+            "./algorithms/sorting/quick_sort.cpp"
         ],
         "showOutput": "always"
     },
@@ -32,7 +32,7 @@
             "-O0",
             "-o",
             "./a.out",
-            "./algorithms/sorting/heap_sort.cpp"
+            "./algorithms/sorting/quick_sort.cpp"
         ],
         // without debugger information
         // "args": ["-o", "hello.exe", "hello.cpp"],
