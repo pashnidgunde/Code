@@ -1,27 +1,8 @@
 #include <iostream>
 #include <vector>
-//#include <algorithm>
+#include "functors.h"
 
-namespace algorithm
-{
-    template <typename T>
-    struct less
-    {
-        bool operator()(const T& lhs, const T& rhs) const
-        {
-            return lhs < rhs;
-        }
-    };
 
-    template <typename T>
-    struct greater
-    {
-        bool operator()(const T& lhs, const T& rhs) const
-        {
-            return lhs > rhs;
-        }
-    };
-}
 
 // The operator tells the what is to be compared.
 // Operator less or greater
