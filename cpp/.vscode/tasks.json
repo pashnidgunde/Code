@@ -11,7 +11,7 @@
             "-Wextra",
             "-Werror",
             "-pipe",
-            "./algorithms/sorting/quick_sort.cpp"
+            "./algorithms/dynamic_programming/fibonacci.cpp"
         ],
         "showOutput": "always"
     },
