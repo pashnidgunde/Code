@@ -10,4 +10,4 @@
 *.settings
 git_projects
 
-*.vscode
+*.vscode/
