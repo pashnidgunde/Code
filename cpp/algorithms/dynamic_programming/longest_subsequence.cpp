@@ -37,7 +37,6 @@ int longest_subsequence(const std::vector<int> &v) {
     }
   }
   return pn::algo::max_element(lengths.begin(), lengths.end());
-  // return max;
 }
 
 int main() {
