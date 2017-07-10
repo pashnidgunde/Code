@@ -7,11 +7,12 @@
         "args": [
             "-std=c++14",
             "-g",
+            "-I./algorithms/std",
             "-Wall",
             "-Wextra",
             "-Werror",
             "-pipe",
-            "./algorithms/dynamic_programming/longest_subsequence.cpp"
+            "./misc/count.cpp"
         ],
         "showOutput": "always"
     },
