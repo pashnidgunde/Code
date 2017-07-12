@@ -8,6 +8,7 @@
             "-std=c++14",
             "-g",
             "-I./algorithms/std",
+            "-I./algorithms/sorting",
             "-Wall",
             "-Wextra",
             "-Werror",
@@ -26,6 +27,8 @@
         "args": [
             "-g",
             "-std=c++14",
+            "-I./algorithms/std",
+            "-I./algorithms/sorting",
             "-Wall",
             "-Wextra",
             "-Werror",
@@ -33,7 +36,7 @@
             "-O0",
             "-o",
             "./a.out",
-            "./algorithms/dynamic_programming/count_paths.cpp"
+            "./algorithms/std/test/is_sorted.cpp"
         ],
         // without debugger information
         // "args": ["-o", "hello.exe", "hello.cpp"],
