@@ -5,7 +5,7 @@
 namespace pn {
 namespace algo {
 template <typename Iter, typename Op>
-// auto max_element(Iter begin, Iter end) -> decltype(*Iter) {
+// This function accepts comparison operator
 bool is_sorted(Iter begin, Iter end, Op op) {
 
   while (begin != end && begin + 1 != end && op(*begin, *(begin + 1)))

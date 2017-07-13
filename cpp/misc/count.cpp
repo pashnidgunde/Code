@@ -1,16 +1,18 @@
 
-#include <algorithm>
+
 #include <iostream>
 #include <vector>
 
-// for swap 
+// for swap
+#include "functors.h"
+#include "is_sorted.hpp"
 #include "swap.hpp"
 
 // Program to check if a single swap can sort the array
-// Solution is to 
+// Solution is to
 // 1. find the first left incorrect position
 // 2. Find first right side incorrect position
-// 3. swap elements 
+// 3. swap elements
 // 4. Check if array is sorted , if not, return false;
 // 5. restore elements by swaping previously swapped elements in step 3
 
@@ -36,7 +38,8 @@ bool solution(std::vector<int> &A) {
   }
 
   pn::algo::swap(A[left_index], A[right_index]);
-  bool is_sorted = std::is_sorted(A.begin(), A.end());
+  bool is_sorted =
+      pn::algo::is_sorted(A.begin(), A.end(), pn::functors::less<int>());
   pn::algo::swap(A[right_index], A[left_index]);
   return is_sorted;
 }
