@@ -36,7 +36,7 @@
             "-O0",
             "-o",
             "./a.out",
-            "./algorithms/std/test/is_sorted.cpp"
+            "./misc/count.cpp"
         ],
         // without debugger information
         // "args": ["-o", "hello.exe", "hello.cpp"],
