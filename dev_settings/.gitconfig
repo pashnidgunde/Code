@@ -2,6 +2,6 @@
 	email = pashnidgunde@gmail.com
 	name = pashnidgunde
 [push]
-	default = simple
+	default = current
 [credential]
 	helper = store
