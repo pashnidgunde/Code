@@ -1,3 +1,7 @@
 [user]
 	email = pashnidgunde@gmail.com
 	name = pashnidgunde
+[push]
+	default = simple
+[credential]
+	helper = store
