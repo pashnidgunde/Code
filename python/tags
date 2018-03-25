@@ -1,0 +1,119 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+Area_of_triangle	misc/functions.py	/^def Area_of_triangle (height,base):$/;"	kind:function	line:7
+FindingElements	misc/findingElement.py	/^def FindingElements(numbers,num):$/;"	kind:function	line:7
+FindingElements	rupa/findingElement.py	/^def FindingElements(numbers,num):$/;"	kind:function	line:7
+MaximumElement	rupa/findingElement.py	/^def MaximumElement(numbers):$/;"	kind:function	line:24
+MinimumElement	rupa/findingElement.py	/^def MinimumElement(numbers):$/;"	kind:function	line:16
+ReverseList	rupa/findingElement.py	/^def  ReverseList(numbers):$/;"	kind:function	line:33
+Scores.py	textbook/Scores.py	1;"	kind:file	line:1
+Segment	coursera/algorithms/greedy_algo/covering_segments.py	/^Segment = namedtuple('Segment', 'start end')$/;"	kind:variable	line:5
+SumOfList	rupa/findingElement.py	/^def SumOfList(numbers):$/;"	kind:function	line:44
+SumOfUserNumber	rupa/findingElement.py	/^def SumOfUserNumber(number):$/;"	kind:function	line:50
+__init__	misc/classes.py	/^    def __init__(self, x):$/;"	kind:member	line:7
+a	coursera/algorithms/greedy_algo/dot_product.py	/^    a = data[1:(n + 1)]$/;"	kind:variable	line:19
+a	coursera/algorithms/greedy_algo/largest_number.py	/^    a = data[1:]$/;"	kind:variable	line:15
+a	misc/functions.py	/^a = Area_of_triangle( height,base)$/;"	kind:variable	line:19
+a	misc/practice.py	/^        a = a+1$/;"	kind:variable	line:15
+a	misc/practice.py	/^    a= a+1$/;"	kind:variable	line:5
+a	misc/practice.py	/^    a=1$/;"	kind:variable	line:11
+a	misc/practice.py	/^a = 0$/;"	kind:variable	line:3
+area	misc/classes.py	/^    def area(self):$/;"	kind:member	line:9
+b	coursera/algorithms/greedy_algo/dot_product.py	/^    b = data[(n + 1):]$/;"	kind:variable	line:20
+base	misc/functions.py	/^base = int(input())$/;"	kind:variable	line:18
+calculator.py	misc/calculator.py	1;"	kind:file	line:1
+cats	misc/lists.py	/^cats = ['Tom','jerry','kitty','meenu']$/;"	kind:variable	line:5
+change.py	coursera/algorithms/greedy_algo/change.py	1;"	kind:file	line:1
+choice	misc/calculator.py	/^    choice = int(input("Choose your option: "))$/;"	kind:variable	line:18
+choice	misc/calculator.py	/^choice = 0$/;"	kind:variable	line:5
+circle	misc/classes.py	/^circle = shape(2)$/;"	kind:variable	line:12
+classes.py	misc/classes.py	1;"	kind:file	line:1
+covering_segments.py	coursera/algorithms/greedy_algo/covering_segments.py	1;"	kind:file	line:1
+data	coursera/algorithms/greedy_algo/dot_product.py	/^    data = list(map(int, input.split()))$/;"	kind:variable	line:17
+data	coursera/algorithms/greedy_algo/fractional_knapsack.py	/^    data = list(map(int, sys.stdin.read().split()))$/;"	kind:variable	line:53
+data	coursera/algorithms/greedy_algo/largest_number.py	/^    data = input.split()$/;"	kind:variable	line:14
+deque.py	collection/deque.py	1;"	kind:file	line:1
+dictonaries.py	misc/dictonaries.py	1;"	kind:file	line:1
+different_summands.py	coursera/algorithms/greedy_algo/different_summands.py	1;"	kind:file	line:1
+dot_product.py	coursera/algorithms/greedy_algo/dot_product.py	1;"	kind:file	line:1
+drop_first_last	textbook/iterable.py	/^def drop_first_last(grades):$/;"	kind:function	line:7
+ex1.py	lphw/ex1.py	1;"	kind:file	line:1
+factorial	coursera/algorithms/introduction/factorial.py	/^def factorial(n):$/;"	kind:function	line:10
+factorial.py	coursera/algorithms/introduction/factorial.py	1;"	kind:file	line:1
+factorial_recursive	coursera/algorithms/introduction/factorial.py	/^def factorial_recursive(n):$/;"	kind:function	line:4
+fibonacci	coursera/algorithms/introduction/fibonacci.py	/^def fibonacci(n):$/;"	kind:function	line:3
+fibonacci.py	coursera/algorithms/introduction/fibonacci.py	1;"	kind:file	line:1
+fibonacci_huge.py	coursera/algorithms/introduction/fibonacci_huge.py	1;"	kind:file	line:1
+fibonacci_non_recursive	coursera/algorithms/introduction/fibonacci.py	/^def fibonacci_non_recursive(n):$/;"	kind:function	line:9
+findingElement.py	misc/findingElement.py	1;"	kind:file	line:1
+findingElement.py	rupa/findingElement.py	1;"	kind:file	line:1
+fractional_knapsack.py	coursera/algorithms/greedy_algo/fractional_knapsack.py	1;"	kind:file	line:1
+functions.py	misc/functions.py	1;"	kind:file	line:1
+gcd	coursera/algorithms/introduction/gcd1.py	/^def gcd(n1,n2):$/;"	kind:function	line:13
+gcd.py	coursera/algorithms/introduction/gcd.py	1;"	kind:file	line:1
+gcd1.py	coursera/algorithms/introduction/gcd1.py	1;"	kind:file	line:1
+gcd_faster	coursera/algorithms/introduction/gcd.py	/^def gcd_faster(a,b):$/;"	kind:function	line:4
+gcd_faster	coursera/algorithms/introduction/gcd1.py	/^def gcd_faster(a,b):$/;"	kind:function	line:23
+gcd_list	coursera/algorithms/introduction/gcd1.py	/^def gcd_list(numbers):$/;"	kind:function	line:4
+get_change	coursera/algorithms/greedy_algo/change.py	/^def get_change(m):$/;"	kind:function	line:9
+get_fibonacci_huge_naive	coursera/algorithms/introduction/fibonacci_huge.py	/^def get_fibonacci_huge_naive(n, m):$/;"	kind:function	line:19
+get_optimal_value	coursera/algorithms/greedy_algo/fractional_knapsack.py	/^def get_optimal_value(capacity, weights, values):$/;"	kind:function	line:14
+height	misc/functions.py	/^height = int(input())$/;"	kind:variable	line:16
+hello.py	misc/hello.py	1;"	kind:file	line:1
+highest_break	textbook/Scores.py	/^highest_break = 0$/;"	kind:variable	line:8
+highest_score	textbook/Scores.py	/^        highest_score = element$/;"	kind:variable	line:16
+highest_score	textbook/Scores.py	/^highest_score = input_list[0]$/;"	kind:variable	line:11
+input	coursera/algorithms/greedy_algo/covering_segments.py	/^    input = sys.stdin.read()$/;"	kind:variable	line:16
+input	coursera/algorithms/greedy_algo/different_summands.py	/^    input = sys.stdin.read()$/;"	kind:variable	line:10
+input	coursera/algorithms/greedy_algo/dot_product.py	/^    input = sys.stdin.read()$/;"	kind:variable	line:16
+input	coursera/algorithms/greedy_algo/largest_number.py	/^    input = sys.stdin.read()$/;"	kind:variable	line:13
+input	coursera/algorithms/introduction/fibonacci_huge.py	/^    input = sys.stdin.read();$/;"	kind:variable	line:32
+input_list	textbook/Scores.py	/^input_list = list(map(int,input().strip().split(' ')))$/;"	kind:variable	line:6
+iterable.py	textbook/iterable.py	1;"	kind:file	line:1
+largest_number	coursera/algorithms/greedy_algo/largest_number.py	/^def largest_number(a):$/;"	kind:function	line:5
+largest_number.py	coursera/algorithms/greedy_algo/largest_number.py	1;"	kind:file	line:1
+lim	rupa/findingElement.py	/^lim = int(input())$/;"	kind:variable	line:73
+line	textbook/iterable.py	/^line = 'nobody:*:-2:-2:Unpreviledged User:\/var\/empty:\/usr\/bin\/false'$/;"	kind:variable	line:27
+lists.py	misc/lists.py	1;"	kind:file	line:1
+lowest_break	textbook/Scores.py	/^lowest_break = 0$/;"	kind:variable	line:9
+lowest_score	textbook/Scores.py	/^        lowest_score = element$/;"	kind:variable	line:20
+lowest_score	textbook/Scores.py	/^lowest_score = input_list[0]$/;"	kind:variable	line:12
+m	coursera/algorithms/greedy_algo/change.py	/^    m = int(sys.stdin.read())$/;"	kind:variable	line:33
+max	rupa/findingElement.py	/^max = MaximumElement(numbers)$/;"	kind:variable	line:66
+max_dot_product	coursera/algorithms/greedy_algo/dot_product.py	/^def max_dot_product(a, b):$/;"	kind:function	line:7
+message	misc/hello.py	/^message = "hello world"$/;"	kind:variable	line:13
+min	rupa/findingElement.py	/^min = MinimumElement(numbers)$/;"	kind:variable	line:64
+n	coursera/algorithms/greedy_algo/different_summands.py	/^    n = int(input)$/;"	kind:variable	line:11
+n	coursera/algorithms/greedy_algo/dot_product.py	/^    n = data[0]$/;"	kind:variable	line:18
+n	coursera/algorithms/introduction/factorial.py	/^n = int(input().strip())$/;"	kind:variable	line:19
+n	textbook/Scores.py	/^n = int(input().strip())$/;"	kind:variable	line:5
+number	misc/practice.py	/^number = int(input()) $/;"	kind:variable	line:20
+number1	misc/calculator.py	/^    number1 = int(input("Enter first number"))$/;"	kind:variable	line:23
+number2	misc/calculator.py	/^    number2 = int(input("Enter second number"))$/;"	kind:variable	line:24
+numbers	misc/findingElement.py	/^numbers = [1,2,3,4,5,6,7,8,9]$/;"	kind:variable	line:18
+numbers	rupa/findingElement.py	/^numbers = [1,2,3,4,5,6,7,8,9]$/;"	kind:variable	line:62
+numbers	textbook/iterable.py	/^numbers = [10,20,30,40,50]$/;"	kind:variable	line:21
+opt_value	coursera/algorithms/greedy_algo/fractional_knapsack.py	/^    opt_value = get_optimal_value(capacity, weights, values)$/;"	kind:variable	line:64
+optimal_points	coursera/algorithms/greedy_algo/covering_segments.py	/^def optimal_points(segments):$/;"	kind:function	line:7
+optimal_summands	coursera/algorithms/greedy_algo/different_summands.py	/^def optimal_summands(n):$/;"	kind:function	line:4
+phonebook	misc/dictonaries.py	/^phonebook = {'rupa nidgunde':976414309,'prashant nidgunde':992342756,'deepa yadav':9158704675,'girish yadav':992342123}$/;"	kind:variable	line:4
+points	coursera/algorithms/greedy_algo/covering_segments.py	/^    points = optimal_points(segments)$/;"	kind:variable	line:19
+practice.py	misc/practice.py	1;"	kind:file	line:1
+q	collection/deque.py	/^q = deque()$/;"	kind:variable	line:3
+record	textbook/iterable.py	/^record = ('ACME', 50, 123.40,(12,18,2012))$/;"	kind:variable	line:33
+segments	coursera/algorithms/greedy_algo/covering_segments.py	/^    segments = list(map(lambda x: Segment(x[0], x[1]), zip(data[::2], data[1::2])))$/;"	kind:variable	line:18
+sentence	misc/hello.py	/^sentence = (word1  +" " + word2 +" "+ word3)$/;"	kind:variable	line:27
+shape	misc/classes.py	/^class shape:$/;"	kind:class	line:6
+sum	rupa/findingElement.py	/^sum = SumOfList(numbers)$/;"	kind:variable	line:70
+summands	coursera/algorithms/greedy_algo/different_summands.py	/^    summands = optimal_summands(n)$/;"	kind:variable	line:12
+total	rupa/findingElement.py	/^total = SumOfUserNumber(lim)$/;"	kind:variable	line:74
+values	coursera/algorithms/greedy_algo/fractional_knapsack.py	/^    values = data[2:(2 * n + 2):2]$/;"	kind:variable	line:59
+weights	coursera/algorithms/greedy_algo/fractional_knapsack.py	/^    weights = data[3:(2 * n + 2):2]$/;"	kind:variable	line:62
+word1	misc/hello.py	/^word1 = "good"$/;"	kind:variable	line:23
+word2	misc/hello.py	/^word2 = "morning"$/;"	kind:variable	line:24
+word3	misc/hello.py	/^word3 = "rupa"$/;"	kind:variable	line:25
+x	misc/findingElement.py	/^x = int(input())$/;"	kind:variable	line:20
