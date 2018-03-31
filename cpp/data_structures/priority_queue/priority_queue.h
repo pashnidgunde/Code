@@ -146,8 +146,9 @@ void insertAtRear(int number) {
   if (rear_index < MIN_INDEX) {
     max = getMax(number);
     insertAtFront(max);
-    printf("\n Inserting %d at front index : %d , pivot : %d", max, front_index,
-           arr[pivot_index]);
+    // printf("\n Inserting %d at front index : %d , pivot : %d", max,
+    // front_index,
+    //       arr[pivot_index]);
   } else {
     arr[rear_index] = number;
     rear_index--;
@@ -161,19 +162,19 @@ void insert(int number) {
   {
     insertAtFront(number);
   }
-  printrow();
+  // printrow();
 }
 
 void setPivotNumber(int number) {
   arr[pivot_index] = number;
-  printrow();
+  // printrow();
 }
 
 void print() {
-  int i = 0;
-  for (i = 0; i < TOTAL; ++i) {
-    printf("\narr[%d] : %d", i, arr[i]);
-  }
+  // int i = 0;
+  // for (i = 0; i < TOTAL; ++i) {
+  //  printf("\narr[%d] : %d", i, arr[i]);
+  //}
 
   printf("\nOutput :: %d", getMinFromRange());
 }
