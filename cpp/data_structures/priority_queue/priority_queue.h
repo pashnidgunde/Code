@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define TOTAL 100000
+#define TOTAL 128000000
 #define PERCENT_INDEX 95
 
 int MAX_INDEX = (TOTAL - 1);
@@ -17,7 +17,7 @@ int pivot_index = PIVOT_INDEX;
 int rear_index = PIVOT_INDEX - 1;
 int front_index = PIVOT_INDEX + 1;
 
-int arr[TOTAL];
+int *arr = NULL;
 
 void insertAtFront(int);
 void insertAtRear(int);
@@ -27,6 +27,12 @@ void printrow();
 int getMaxFromRange();
 
 void reset() {
+  if (arr != NULL) {
+    delete[] arr;
+  }
+
+  arr = (int *)malloc(sizeof(int) * TOTAL);
+
   int i = 0;
   for (i = 0; i <= MAX_INDEX; i++) {
     arr[i] = INT_MIN;

@@ -47,12 +47,25 @@ void quickSort(int arr1[], int low, int high) {
   }
 }
 
+/* The main function that implements QuickSort but discards small numbers
+ arr1[] --> arr1ay to be sorted,
+  low  --> Starting index,
+  high  --> Ending index */
+void quickSortK(int arr1[], int low, int high, int) {
+  if (low < high) {
+    /* pi is partitioning index, arr1[p] is now
+       at right place */
+    int pi = partition(arr1, low, high);
+
+    // Separately sort elements before
+    // partition and after partition
+    quickSort(arr1, low, pi - 1);
+    quickSort(arr1, pi + 1, high);
+  }
+}
+
 int main() {
   int i = 0;
-
-  // int* temp = new int[TOTAL];
-
-  // int* temp2 = temp;
 
   srand(time(NULL));
 
@@ -99,5 +112,6 @@ int main1() {
 
   return 0;
 }
+
 
 */
