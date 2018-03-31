@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define TOTAL 1000
+#define TOTAL 10000
 #define PERCENT_INDEX 95
 
 int MAX_INDEX = (TOTAL - 1);
