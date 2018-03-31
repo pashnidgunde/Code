@@ -57,9 +57,9 @@ int main() {
   srand(time(NULL));
 
   reset();
-  setPivotNumber(rand() % 25);
+  setPivotNumber(rand() % TOTAL);
   for (i = 1; i < TOTAL; i++) {
-    insert(rand() % 25);
+    insert(rand() % TOTAL);
   }
   print();
 
