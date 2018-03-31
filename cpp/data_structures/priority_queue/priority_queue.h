@@ -76,17 +76,19 @@ int getMin(int number) {
 void reorderRightSideOfPivot(int number) {
   insertAtRear(arr[pivot_index]);
   arr[pivot_index] = number;
-  int max = getMaxFromRange();
+  int max_index = getMaxFromRange();
   int i;
   for (i = pivot_index; i <= MAX_INDEX; ++i) {
-    if (arr[i] < max && arr[i] != INT_MIN) {
+    if (i != max_index) {
       insertAtRear(arr[i]);
       arr[i] = INT_MIN;
       front_index--;
     }
   }
-  // insertAtRear(arr[pivot_index]);
-  arr[pivot_index] = max;
+  insertAtRear(arr[pivot_index]);
+  arr[pivot_index] = arr[max_index];
+  arr[max_index] = INT_MIN;
+  front_index--;
 }
 
 int getMinFromRange() {
@@ -101,14 +103,15 @@ int getMinFromRange() {
 }
 
 int getMaxFromRange() {
+  int max_index = INT_MIN;
   int max = INT_MIN;
   int i;
   for (i = pivot_index; i <= MAX_INDEX; i++) {
     if (arr[i] > max) {
-      max = arr[i];
+      max_index = i;
     }
   }
-  return max;
+  return max_index;
 }
 
 void insertAtFront(int number) {

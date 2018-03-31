@@ -21,7 +21,8 @@
         "*cpp*cpp*cpp*cpp*cpp*cpp*h*h*halgorithm": "cpp",
         "*.tcc": "c",
         "chrono": "cpp",
-        "limits": "cpp"
+        "limits": "cpp",
+        "iostream": "cpp"
     },
     "editor.formatOnSave": true,
     "clang-format.executable": "/home/pnidgunde/Code/git_projects/llvm/install/bin/clang-format",
