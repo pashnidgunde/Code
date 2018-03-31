@@ -18,7 +18,10 @@
         "*h*cpp*cpp*cc*cc*cc*cc*cc*cc*h*h*h*h*h*h*h*cpp*hpp*cpp*cpp*cpp*cpp*cppany": "cpp",
         "variant": "cpp",
         "*h*h*cpp*cpp*cpp*cpp*cpp*cpp*h*h*h*h*cpp*cpp*cpp*cpp*cpp*cpp*cpp*cpp__config": "cpp",
-        "*cpp*cpp*cpp*cpp*cpp*cpp*h*h*halgorithm": "cpp"
+        "*cpp*cpp*cpp*cpp*cpp*cpp*h*h*halgorithm": "cpp",
+        "*.tcc": "c",
+        "chrono": "cpp",
+        "limits": "cpp"
     },
     "editor.formatOnSave": true,
     "clang-format.executable": "/home/pnidgunde/Code/git_projects/llvm/install/bin/clang-format",

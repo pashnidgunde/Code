@@ -3,3 +3,6 @@
 	url = https://github.com/madler/zlib
 	ignore = dirty
 
+[submodule "git_projects/git"]
+	path = git_projects/git
+	url = https://github.com/git/git.git
