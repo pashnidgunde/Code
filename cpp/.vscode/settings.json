@@ -22,7 +22,9 @@
         "*.tcc": "c",
         "chrono": "cpp",
         "limits": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "bitset": "cpp",
+        "future": "cpp"
     },
     "editor.formatOnSave": true,
     "clang-format.executable": "/home/pnidgunde/Code/git_projects/llvm/install/bin/clang-format",
