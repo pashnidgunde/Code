@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define TOTAL 25
+#define TOTAL 100
 #define PERCENT_INDEX 95
 
 int MAX_INDEX = (TOTAL - 1);
@@ -42,7 +42,7 @@ int getMax(int number) {
   int max_number_index = INT_MIN;
   int i;
   for (i = MIN_INDEX; i < pivot_index; i++) {
-    if (arr[i] >= max) {
+    if (arr[i] > max) {
       max = arr[i];
       max_number_index = i;
     }
@@ -73,24 +73,40 @@ int getMin(int number) {
   return min;
 }
 */
+
 void reorderRightSideOfPivot(int number) {
   insertAtRear(arr[pivot_index]);
   arr[pivot_index] = number;
   int max_index = getMaxFromRange();
   int i;
-  for (i = pivot_index; i <= MAX_INDEX; ++i) {
-    if (i != max_index) {
+  for (i = pivot_index + 1; i <= MAX_INDEX; ++i) {
+    if (i != max_index && arr[i] != INT_MIN) {
       insertAtRear(arr[i]);
       arr[i] = INT_MIN;
       front_index--;
     }
   }
-  insertAtRear(arr[pivot_index]);
-  arr[pivot_index] = arr[max_index];
-  arr[max_index] = INT_MIN;
-  front_index--;
+  if (pivot_index != max_index) {
+    insertAtRear(arr[pivot_index]);
+    arr[pivot_index] = arr[max_index];
+    arr[max_index] = INT_MIN;
+    front_index--;
+  }
 }
 
+/*
+void reorderRightSideOfPivot(int number) {
+  int max = getMaxFromRange();
+  int i;
+  for (i = pivot_index + 1; i <= MAX_INDEX; ++i) {
+    insertAtRear(arr[i]);
+    arr[i] = INT_MIN;
+    front_index--;
+  }
+  insertAtRear(arr[pivot_index]);
+  arr[pivot_index] = max;
+}
+*/
 int getMinFromRange() {
   int min = INT_MAX;
   int i;
@@ -109,9 +125,11 @@ int getMaxFromRange() {
   for (i = pivot_index; i <= MAX_INDEX; i++) {
     if (arr[i] > max) {
       max_index = i;
+      max = arr[i];
     }
   }
   return max_index;
+  // return max;
 }
 
 void insertAtFront(int number) {
@@ -128,6 +146,8 @@ void insertAtRear(int number) {
   if (rear_index < MIN_INDEX) {
     max = getMax(number);
     insertAtFront(max);
+    printf("\n Inserting %d at front index : %d , pivot : %d", max, front_index,
+           arr[pivot_index]);
   } else {
     arr[rear_index] = number;
     rear_index--;
