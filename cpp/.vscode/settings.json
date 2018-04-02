@@ -24,7 +24,9 @@
         "limits": "cpp",
         "iostream": "cpp",
         "bitset": "cpp",
-        "future": "cpp"
+        "future": "cpp",
+        "array": "c",
+        "string_view": "c"
     },
     "editor.formatOnSave": true,
     "clang-format.executable": "/home/pnidgunde/Code/git_projects/llvm/install/bin/clang-format",

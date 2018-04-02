@@ -3,25 +3,30 @@
 #include "./deque.h"
 #include "./tree.h"
 
-/*
-void CopyToBuckets() {
-  struct QueueNode *temp;
+// Assumption that it wont grow beyond 100
+Queue *bucketStartingWith2[100000];
+Queue *bucketStartingWith3[100000];
 
-  if (head->next == tail) {
+void CopyToBuckets(Queue *queueForPath) {
+  struct Queue *copy = NULL;
+  struct QueueNode *temp = temp;
+  intializeQueue(copy);
+
+  if (queueForPath->head->next == queueForPath->tail) {
     // printf("Queue is empty\n");
     return;
   }
 
   // first element is 0, skip it
-  temp = head->next->next;
+  temp = queueForPath->head->next->next;
 
-  while (temp != tail) {
+  while (temp != queueForPath->tail) {
+    enqueueAtRear(copy, temp->data);
     printf("%-3d", temp->data);
     temp = temp->next;
   }
   printf("\n");
 }
-*/
 
 void printPathsUtil(struct node *curr_node, Queue *queueForPath, int sum,
                     int sum_so_far) {
@@ -37,7 +42,7 @@ void printPathsUtil(struct node *curr_node, Queue *queueForPath, int sum,
   if (sum_so_far == sum) {
     printf("\nPath found: ");
     display(queueForPath);
-    // CopyToBuckets();
+    // copyToBuckets(queueForPath);
   }
 
   // if left child exists
@@ -71,11 +76,11 @@ void buildTree(struct node *parent, int remaining) {
 int main() {
   /*create root*/
   struct node *root = createNewTreeNode(0);
-  buildTree(root, 10);
+  buildTree(root, 330);
 
   Queue *queueForPath = (Queue *)(malloc(sizeof(Queue)));
   intializeQueue(queueForPath);
-  printPathsUtil(root, queueForPath, 10, 0);
+  printPathsUtil(root, queueForPath, 330, 0);
 
   getchar();
   return 0;
