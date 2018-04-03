@@ -2,18 +2,23 @@
     "version": "0.1.0",
     "linux": {
         "version": "0.1.0",
-        "command": "/usr/bin/g++",
+        "command": "/usr/bin/gcc",
+        //"command": "/usr/bin/g++",
         "isShellCommand": true,
         "args": [
-            "-std=c++14",
+            //"-std=c++14",
             "-g",
-            "-I./algorithms/std",
-            "-I./algorithms/sorting",
-            "-Wall",
-            "-Wextra",
-            "-Werror",
-            "-pipe",
-            "./misc/count.cpp"
+            "-x",
+            "c",
+            //"-I./algorithms/std",
+            //"-I./algorithms/sorting",
+            //"-Wall",
+            //"-Wextra",
+            //"-Werror",
+            //"-pipe",
+            "./data_structures/priority_queue/ex3.c",
+            "-o",
+            "./data_structures/priority_queue/a.out"
         ],
         "showOutput": "always"
     },

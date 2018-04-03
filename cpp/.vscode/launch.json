@@ -6,11 +6,9 @@
             "type": "cppdbg",
             "request": "launch",
             "args": [],
-            "stopAtEntry": false,
             "cwd": "${workspaceRoot}",
-            "environment": [],
-            "externalConsole": true,
-            "program": "${workspaceRoot}/a.out",
+            //"program": "${workspaceRoot}/a.out",
+            "program": "${workspaceRoot}/data_structures/priority_queue/a.out",
             "linux": {
                 "MIMode": "gdb",
                 "setupCommands": [
