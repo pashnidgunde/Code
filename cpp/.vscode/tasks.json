@@ -16,7 +16,7 @@
             //"-Wextra",
             //"-Werror",
             //"-pipe",
-            "./data_structures/priority_queue/ex2.c",
+            "./data_structures/priority_queue/ex3.c",
             "-o",
             "./data_structures/priority_queue/a.out"
         ],

@@ -1,5 +1,6 @@
 #ifndef __tree__
 #define __tree__
+#include <stdio.h>
 #include <stdlib.h>
 
 struct node {
@@ -21,6 +22,20 @@ struct node *createNewTreeNode(int data) {
   node->left = NULL;
   node->right = NULL;
   return (node);
+}
+
+/* Given a binary tree, print its nodes in preorder*/
+void printPreorder(struct node *node) {
+  if (node == NULL) return;
+
+  /* first print data of node */
+  printf("%d ", node->data);
+
+  /* then recur on left sutree */
+  printPreorder(node->left);
+
+  /* now recur on right subtree */
+  printPreorder(node->right);
 }
 
 #endif

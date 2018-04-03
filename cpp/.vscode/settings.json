@@ -26,7 +26,12 @@
         "bitset": "cpp",
         "future": "cpp",
         "array": "c",
-        "string_view": "c"
+        "string_view": "c",
+        "istream": "c",
+        "ostream": "c",
+        "ratio": "c",
+        "system_error": "c",
+        "type_traits": "c"
     },
     "editor.formatOnSave": true,
     "clang-format.executable": "/home/pnidgunde/Code/git_projects/llvm/install/bin/clang-format",

@@ -96,4 +96,11 @@ void display(Queue *queue) {
   printf("\n");
 }
 
+typedef struct ListOfQueues {
+  Queue *listOfTwos[1000];
+  Queue *listOfThrees[1000];
+  int countOfTwos;
+  int countOfThrees;
+} ListOfQueues;
+
 #endif
