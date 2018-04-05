@@ -8,15 +8,15 @@
         "args": [
             //"-std=c++14",
             "-g",
-            "-x",
-            "c",
+            //"-x",
+            //"c",
             //"-I./algorithms/std",
             //"-I./algorithms/sorting",
             //"-Wall",
             //"-Wextra",
             //"-Werror",
             //"-pipe",
-            "./data_structures/priority_queue/ex3.c",
+            "./data_structures/priority_queue/test1.c",
             "-o",
             "./data_structures/priority_queue/a.out"
         ],

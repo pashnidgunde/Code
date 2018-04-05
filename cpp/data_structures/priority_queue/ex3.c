@@ -3,7 +3,6 @@
 #include "./deque.h"
 #include "./tree.h"
 
-// Max to 30
 struct ListOfQueues hashmap[30];
 
 void buildTree(struct node *parent) {
@@ -61,21 +60,22 @@ void printPathsUtil(struct node *curr_node, Queue *queueForPath, int weight) {
     enqueueAtRear(queueForPath, weight);
   }
 
-  if (curr_node->data == 0) {
-    printf("\nPath found after 0: ");
-    display(queueForPath);
-  }
-
   if (checkInHashMap(curr_node->data, weight)) {
     getDataFromHashMap(curr_node->data, weight, queueForPath);
     display(queueForPath);
-  } else {
-    if (curr_node->left) {
-      printPathsUtil(curr_node->left, queueForPath, 2);
-    }
-    if (curr_node->right) {
-      printPathsUtil(curr_node->right, queueForPath, 3);
-    }
+    return;
+  }
+
+  // if (curr_node->data == 0) {
+  //  printf("\nPath found after 0: ");
+  //  display(queueForPath);
+  //}
+
+  if (curr_node->left) {
+    printPathsUtil(curr_node->left, queueForPath, 2);
+  }
+  if (curr_node->right) {
+    printPathsUtil(curr_node->right, queueForPath, 3);
   }
 
   // printf("\n%d", curr_node->data);
