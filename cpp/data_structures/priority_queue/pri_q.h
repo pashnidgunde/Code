@@ -41,10 +41,12 @@ void initializeQueue() {
 }
 
 void insertByPriority(double data) {
+  /* Discard numbers less than 95 % */
   if (compare(data, pri_que[MAX - 1]) <= 0) {
     return;
   }
 
+  /* First insert, can be done onece */
   if (rear == -1) {
     rear++;
     pri_que[rear] = data;
@@ -61,7 +63,7 @@ void insertByPriority(double data) {
 }
 
 /* Function to check priority and place element */
-
+/* Binary search could still be faster */
 void check(double data) {
   long i, j;
   for (i = 0; i <= rear; i++) {
