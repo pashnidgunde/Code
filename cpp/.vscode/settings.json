@@ -33,9 +33,5 @@
         "system_error": "c",
         "type_traits": "c"
     },
-    "editor.formatOnSave": true,
-    "clang-format.executable": "/home/pnidgunde/Code/git_projects/llvm/install/bin/clang-format",
-    "C_Cpp.clang_format_formatOnSave": true,
-    "editor.formatOnType": true,
-    "clang-format.style": "/home/pnidgunde/Code/cpp/.clang-format"
+    "editor.formatOnSave": true
 }

@@ -11,7 +11,7 @@ export LIBRARY_PATH=/home/pnidgunde/Code/git_projects/zlib/install/lib:$LIBRARY_
 export PATH=/home/pnidgunde/Code/git_projects/llvm/install/bin:$PATH
 
 # Aliases settings
-alias g++='/usr/bin/g++ -g -std=c++11 -Wall -Werror '
+alias g++='/usr/bin/g++ -I/home/prashant/Code/cpp/include -g -std=c++1z -Wall -Werror '
 alias gdb='/usr/bin/gdb -tui'
 alias c='clear'
 alias l='ls -ltr'
@@ -23,3 +23,4 @@ parse_git_branch() {
 export PS1="\u@\h \[\033[32m\]\$PWD\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "
 
 alias clone_code='git clone -b master git@github.com:pashnidgunde/Code.git'
+alias python='/usr/bin/python3'

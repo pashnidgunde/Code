@@ -1,7 +1,0 @@
-[
-  {
-    "directory": "/home/pnidgunde/Code/cpp/modernize",
-    "command": "g++ -c -std=c++11 -o stack.o this.cpp",
-    "file": "this.cpp"
-  }
-]
