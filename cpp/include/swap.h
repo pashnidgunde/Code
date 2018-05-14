@@ -1,9 +1,15 @@
 #pragma once
 
-template <typename T>
-void swap(T& lhs, T& rhs)
+namespace pn
 {
-	T temp=std::move(lhs);
-	lhs = std::move(rhs);
-	rhs = std::move(lhs);
+	namespace algo
+	{
+		template <typename T>
+		void swap(T& lhs, T& rhs)
+		{
+			T temp = std::move(lhs);
+			lhs = std::move(rhs);
+			rhs = std::move(temp);
+		}
+	}
 }

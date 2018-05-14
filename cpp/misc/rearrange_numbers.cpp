@@ -6,20 +6,17 @@ number  should be greater than its left number and right number */
 
 #include <vector>
 #include <array>
-#include "algo/sort/bubble_sort.h"
+#include "algorithm.h"
 #include "functors.h"
 #include "utils.h"
 
 template<typename Iter>
 void rearrange_naive(Iter begin , Iter end)
 {
-    // TODO : To use the best sorting algo
-    // generic bubble sort is used for testing purpose only
-    pn::algo::bubbleSort(begin,end,pn::functors::less<int>());
+    pn::algo::quickSort(begin,end,pn::functors::less<int>());
     while(begin+2 != end)
     {
-        // TODO
-        std::swap(*(begin+1), *(begin+2));
+        pn::algo::swap(*(begin+1), *(begin+2));
         std::advance(begin,2);
     }
 }
@@ -51,7 +48,8 @@ void rearrange_efficient(Iter begin, Iter end)
 int main()
 {
     std::vector<int> vec{1,5,6,9,2,3};
-    std::vector<int> vec2(vec);
+    std::vector<int> vec2;
+    std::copy(vec.begin(),vec.end(),std::back_inserter(vec));
     rearrange_naive(std::begin(vec),std::end(vec));
     pn::utils::print<std::vector<int>::iterator> 
         (std::begin(vec),std::end(vec));
