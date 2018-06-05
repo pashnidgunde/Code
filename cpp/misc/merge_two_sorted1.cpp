@@ -1,17 +1,36 @@
 // Problem : Is to merge two already sorted ranges into one such that :
-// 1. The first vector has lower range and second has the upper range
-// Input :: 2 vectors ( alredy sorted )
-// Output :: 2 vectors merged with first vector with lower range and second
-// vector with upper range
+// 1. The first vector is sorted and 0 elements are replaced by the actual
+// elements Input :: 2 vectors ( alredy sorted, first with zeros of count of
+// second vector ) Output :: 2 vectors merged in first and is in order
 
-// Algo: Compare first element of first range with second and swap if larger
-// After swap, emplace the element in second range such that order is not
-// broken.
+// Algo: 1. move all zeros to end.
+// 2. Replace 0's with INT_MAX
+// 3. Merge both lists
 
+#include <limits.h>
 #include <vector>
+#include "algorithm.h"
 #include "functors.h"
 #include "swap.h"
 #include "utils.h"
+
+struct isZero {
+  bool operator()(int input) { return input == 0; }
+};
+
+template <typename Iter, typename Pred>
+void moveElementsToEndWithPartition(Iter begin, Iter end, Pred pred) {
+  std::advance(end, -1);
+
+  while (begin != end) {
+    if (pred(*begin)) {
+      pn::algo::swap(*begin, *end);
+      end--;
+      continue;
+    }
+    begin++;
+  }
+}
 
 template <typename Iter>
 void mergeRangeAndKeepTheOrder(Iter begin1, Iter end1, Iter begin2, Iter end2) {
@@ -39,10 +58,11 @@ void mergeRangeAndKeepTheOrder(std::vector<int>& v1, std::vector<int>& v2) {
 }
 
 int main() {
-  std::vector<int> v1{0, 1, 3, 5, 7, 9, 11, 13};
-  std::vector<int> v2{0, 2, 4, 6, 8, 10, 12, 14};
+  std::vector<int> v1{1, 0, 3, 0, 5, 0, 7};
+  std::vector<int> v2{2, 4, 6};
 
+  moveElementsToEndWithPartition(v1.begin(), v1.end(), isZero());
+  pn::algo::replace(v1.begin(), v1.end(), 0, INT_MAX);
   mergeRangeAndKeepTheOrder(v1, v2);
   pn::utils::print<std::vector<int>::iterator>(std::begin(v1), std::end(v1));
-  pn::utils::print<std::vector<int>::iterator>(std::begin(v2), std::end(v2));
 }
