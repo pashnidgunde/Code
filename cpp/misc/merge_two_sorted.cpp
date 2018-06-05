@@ -17,10 +17,10 @@ template <typename Iter>
 void mergeRangeAndKeepTheOrder(Iter begin1, Iter end1, Iter begin2, Iter end2) {
   while (begin1 != end1) {
     auto begin2Temp = begin2;
-    if (*begin2Temp < *begin1) {
+    if (pn::functors::less<int>()(*begin2Temp, *begin1)) {
       pn::algo::swap(*begin1, *begin2);
       while ((begin2Temp + 1) != end2) {
-        if (*begin2Temp > *(begin2Temp + 1)) {
+        if (pn::functors::greater<int>()(*begin2Temp, *(begin2Temp + 1))) {
           pn::algo::swap(*begin2Temp, *(begin2Temp + 1));
           std::advance(begin2Temp, 1);
         } else {
