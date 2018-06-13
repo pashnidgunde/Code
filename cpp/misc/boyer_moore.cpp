@@ -78,14 +78,14 @@ T majorityUsingUnorderedMap(std::vector<T>& sequence) {
 // O(n) and constant space
 template <typename T>
 T majorityUsingBoyerMoore(std::vector<T>& sequence) {
-  int m = -1;
+  int prevElement = -1;
   size_t count = 0;
   for (const auto& elem : sequence) {
     if (0 == count) {
-      m = elem;
+      prevElement = elem;
       count = 1;
     } else {
-      (m == elem) ? count++ : count--;
+      (prevElement == elem) ? count++ : count--;
       if (count > sequence.size() / 2) return elem;
     }
   }
