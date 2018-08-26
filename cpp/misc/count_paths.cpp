@@ -13,18 +13,14 @@ int matrix[3][3] = {{1, 1, 1}, {1, 1, 1}, {1, 1, 1}};
 
 // Naive algorithm that visits each path to sum up
 int max_paths_recursive(int row, int col) {
-
   // if path is blocked return 0
-  if (matrix[row][col] == 0)
-    return 0;
+  if (matrix[row][col] == 0) return 0;
 
   // if beyond the boundary, return 0
-  if (row == 3 || col == 3)
-    return 0;
+  if (row == 3 || col == 3) return 0;
 
   // if destination , there exists a path, return 1
-  if (row == 2 && col == 2)
-    return 1;
+  if (row == 2 && col == 2) return 1;
 
   // do it for each down and right places.
   return max_paths_recursive(row + 1, col) + max_paths_recursive(row, col + 1);
@@ -56,17 +52,14 @@ std::unordered_map<RowValPair, int, pair_hash> dist{{{2, 2}, 1}};
 
 int max_path_recursive_memoization(int row, int col) {
   // if path is blocked return 0
-  if (matrix[row][col] == 0)
-    return 0;
+  if (matrix[row][col] == 0) return 0;
 
   // if beyond the boundary, return 0
-  if (row == 3 || col == 3)
-    return 0;
+  if (row == 3 || col == 3) return 0;
 
   // find , if found no need to compute downpath
   auto it = dist.find({row, col});
-  if (it != dist.end())
-    return it->second;
+  if (it != dist.end()) return it->second;
 
   // compute and store it in memory
   int d = max_path_recursive_memoization(row + 1, col) +

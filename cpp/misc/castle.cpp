@@ -10,15 +10,17 @@ using Matrix = std::vector<std::vector<bool>>;
 void visit(const int &size, int i, int j, const int &di, const int &dj,
            const Matrix &matrix, Matrix &v, int count, int gi, int gj,
            int &final_count) {
-
+  // check if crossing the boundary
   if (j == size || j == -1 || i == -1 || i == size) {
     return;
   }
 
+  // Check if already visisted or there is no path
   if (!matrix[i][j] || v[i][j]) {
     return;
   }
 
+  // mark it visited
   v[i][j] = true;
 
   if (i != gi && j != gj) {
@@ -28,6 +30,7 @@ void visit(const int &size, int i, int j, const int &di, const int &dj,
     count += 1;
   }
 
+  // Check if you reached destination
   if (i == di && j == dj) {
     count += 1;
     if (final_count > count) {
@@ -36,14 +39,17 @@ void visit(const int &size, int i, int j, const int &di, const int &dj,
     }
   }
 
+  // Move down
   visit(size, i, j + 1, di, dj, matrix, v, count, gi, gj, final_count);
+  // Move Left
   visit(size, i - 1, j, di, dj, matrix, v, count, gi, gj, final_count);
+  // Move right
   visit(size, i + 1, j, di, dj, matrix, v, count, gi, gj, final_count);
+  // Move up
   visit(size, i, j - 1, di, dj, matrix, v, count, gi, gj, final_count);
 }
 
 int main() {
-
   auto size = 0;
   std::cin >> size;
   Matrix matrix(size, std::vector<bool>(size));

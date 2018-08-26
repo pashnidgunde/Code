@@ -13,6 +13,11 @@ int main() {
   pn::algo::quickSort(v.begin(), v.end(), pn::functors::less<int>());
   pn::utils::print<std::vector<int>::iterator>(std::begin(v), std::end(v));
 
+  // TODO : Fix Quick sort ASAP
+  std::vector<int> v1{1, 0, 0, 0, 0, 1, 2, 0, 0, 0, 1, 0};
+  pn::algo::quickSort(v1.begin(), v1.end(), pn::functors::less<int>());
+  pn::utils::print<std::vector<int>::iterator>(std::begin(v1), std::end(v1));
+
   // Test on std::list
   // std::list<int> l{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
   // pn::algo::quickSort(l.begin(), l.end(), pn::functors::greater<int>());
