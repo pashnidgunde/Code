@@ -1,12 +1,8 @@
-
-
 #include <iostream>
 #include <vector>
-
-// for swap
 #include "functors.h"
 #include "is_sorted.hpp"
-#include "swap.hpp"
+#include "swap.h"
 
 // Program to check if a single swap can sort the array
 // Solution is to
@@ -26,8 +22,7 @@ bool solution(std::vector<int> &A) {
     }
   }
 
-  if (left_index == -1)
-    return true;
+  if (left_index == -1) return true;
 
   int right_index = -1;
 

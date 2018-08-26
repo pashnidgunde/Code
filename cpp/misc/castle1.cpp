@@ -25,7 +25,6 @@ void update_visited(std::list<Point> &neighbours, Matrix &visited, const int &i,
 
 std::list<Point> getNeighbours(const Matrix &matrix, const Point &p,
                                Matrix &v) {
-
   std::list<Point> neighbours;
 
   // Step 1. Go Right
@@ -37,7 +36,7 @@ std::list<Point> getNeighbours(const Matrix &matrix, const Point &p,
     j++;
   }
 
-  // Step 2. Go to Bottom
+  // Step 2. Go down
   i = p.i + 1;
   j = p.j;
   while (i < size && matrix[i][j]) {
@@ -53,7 +52,7 @@ std::list<Point> getNeighbours(const Matrix &matrix, const Point &p,
     j--;
   }
 
-  // Step 4. Go to Top
+  // Step 4. Go up
   i = p.i - 1;
   j = p.j;
   while (i >= 0 && matrix[i][j]) {
@@ -94,7 +93,6 @@ int visit(const Matrix &matrix, const Point &start, const Point &dest) {
 }
 
 int main() {
-
   auto size = 0;
   std::cin >> size;
   Matrix matrix(size, std::vector<bool>(size));
