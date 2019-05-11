@@ -16,95 +16,128 @@
 #include "utils.h"
 
 // O(n*n)
-template <typename T>
-T majorityUsingCount(std::vector<T>& sequence) {
-  for (auto iter = sequence.begin(); iter != sequence.end(); iter++) {
-    size_t count = 0u;
-    for (auto innerIter = sequence.begin(); innerIter != sequence.end();
-         innerIter++) {
-      if (*iter == *innerIter) {
+template <typename Iter, typename ResultType>
+bool majorityUsingCount(Iter begin, Iter end, ResultType& result) {
+  size_t max_vote_size = std::distance(begin, end) / 2;
+  for (auto iter = begin; iter != end; iter++) {
+    size_t count = 1u;
+    for (auto inner_iter = begin; inner_iter != end; inner_iter++) {
+      if (*iter == *inner_iter) {
         count++;
       }
-      if (count > (sequence.size() / 2)) {
-        return *iter;
+      if (count > max_vote_size) {
+        result = *iter;
+        return true;
       }
     }
   }
-
-  // TODO :  How to return a default type
-  return -1;
+  return false;
 }
 
 // O(n log n)
-template <typename T>
-T majorityUsingCountAfterSort(std::vector<T>& sequence) {
-  if (sequence.empty()) return -1;
-  pn::algo::countingSort(sequence.begin(), sequence.end(),
-                         pn::functors::less<T>());
-  auto iter = sequence.begin();
-  auto prevElement = *iter;
+template <typename Iter, typename ResultType>
+bool majorityUsingCountAfterSort(Iter begin, Iter end, ResultType& result) {
+  size_t max_vote_size = std::distance(begin, end) / 2;
+  // sort with O(n)
+  // pn::algo::countingSort(begin, end, pn::functors::less<T>());
+  std::sort(begin, end, pn::functors::less<ResultType>());
+  auto iter = begin;
+  auto prev_element = *iter;
   iter++;
-  auto count = 0u;
-  while (iter != sequence.end()) {
-    if (*iter == prevElement) {
+  auto count = 1u;
+  while (iter != end) {
+    if (*iter == prev_element) {
       count++;
-      if (count > sequence.size() / 2) {
-        return *iter;
+      if (count > max_vote_size) {
+        result = *iter;
+        return true;
       }
     } else {
-      count = 0;
-      prevElement = *iter;
+      count = 1;
+      prev_element = *iter;
     }
-    iter++;
+    std::advance(iter, 1);
   }
-  return -1;
+  return false;
 }
 
 // O(n)
-template <typename T>
-T majorityUsingUnorderedMap(std::vector<T>& sequence) {
-  std::unordered_map<T, size_t> hashMap;
-  for (const auto& elem : sequence) {
-    hashMap[elem]++;
+template <typename Iter, typename ResultType>
+bool majorityUsingUnorderedMap(Iter begin, Iter end, ResultType& result) {
+  size_t max_vote_size = std::distance(begin, end) / 2;
+  std::unordered_map<ResultType, size_t> hashMap;
+  while (begin != end) {
+    hashMap[*begin]++;
+    std::advance(begin, 1);
   }
 
   for (const auto& elem : hashMap) {
-    if (elem.second > sequence.size() / 2) return elem.first;
-  }
-
-  return -1;
-}
-
-// O(n) and constant space
-template <typename T>
-T majorityUsingBoyerMoore(std::vector<T>& sequence) {
-  int prevElement = -1;
-  size_t count = 0;
-  for (const auto& elem : sequence) {
-    if (0 == count) {
-      prevElement = elem;
-      count = 1;
-    } else {
-      (prevElement == elem) ? count++ : count--;
-      if (count > sequence.size() / 2) return elem;
+    if (elem.second > max_vote_size) {
+      result = elem.first;
+      return true;
     }
   }
 
-  return -1;
+  return false;
+}
+
+// O(n) and constant space
+// 1,2,3,4,5
+
+template <typename Iter, typename ResultType>
+bool majorityUsingBoyerMoore(Iter begin, Iter end, ResultType& result) {
+  size_t max_vote_size = std::distance(begin, end) / 2;
+  size_t count = 0u;
+  Iter prev_element = begin;
+  while (begin != end) {
+    // when count reaches zero make sure to begin again
+    // from current location
+    if (count == 0) {
+      prev_element = begin;
+      count = 1;
+    } else {
+      // continue looking for next element
+      (*prev_element == *begin) ? count++ : count--;
+      if (count > max_vote_size) {
+        result = *begin;
+        return true;
+      }
+    }
+
+    std::advance(begin, 1);
+  }
+  return false;
 }
 
 int main() {
   std::vector<int> v{1, 0, 0, 0, 0, 1, 2, 0, 0, 0, 1, 0};
-  assert(majorityUsingCount(v) == 0);
-  assert(majorityUsingCountAfterSort(v) == 0);
-  assert(majorityUsingUnorderedMap(v) == 0);
-  assert(majorityUsingBoyerMoore(v) == 0);
+  int result;
+  assert(majorityUsingCount(std::begin(v), std::end(v), result) == true);
+  assert(result == 0);
+
+  assert(majorityUsingCountAfterSort(std::begin(v), std::end(v), result) ==
+         true);
+  assert(result == 0);
+
+  assert(majorityUsingUnorderedMap(std::begin(v), std::end(v), result) == true);
+  assert(result == 0);
+
+  assert(majorityUsingBoyerMoore(std::begin(v), std::end(v), result) == true);
+  assert(result == 0);
 
   std::vector<int> v1{1, 2, 3, 4, 5};
-  assert(majorityUsingCount(v1) == -1);
-  assert(majorityUsingCountAfterSort(v1) == -1);
-  assert(majorityUsingUnorderedMap(v1) == -1);
-  assert(majorityUsingBoyerMoore(v1) == -1);
+  assert(majorityUsingCount(std::begin(v1), std::end(v1), result) == false);
+  assert(majorityUsingCountAfterSort(std::begin(v1), std::end(v1), result) ==
+         false);
+  assert(majorityUsingUnorderedMap(std::begin(v1), std::end(v1), result) ==
+         false);
+  assert(majorityUsingBoyerMoore(std::begin(v1), std::end(v1), result) ==
+         false);
+
+  std::vector<int> v2{1, 0, 1, 0, 1};
+  assert(majorityUsingBoyerMoore(std::begin(v2), std::end(v2), result) ==
+         false);
+  assert(result == 1);
 
   return 0;
 }
