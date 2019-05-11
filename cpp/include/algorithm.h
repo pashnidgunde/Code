@@ -9,3 +9,4 @@
 
 #include "shuffle.h"
 #include "swap.h"
+#include "reverse.h"
