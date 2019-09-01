@@ -2,6 +2,8 @@ export PATH=/home/pnidgunde/Code/git_projects/llvm/install/bin:$PATH
 export PATH=/home/pnidgunde/Code/git_projects/cmake/install/bin:$PATH
 export PATH=/home/pnidgunde/Code/git_projects/vim/src/install/bin:$PATH
 export PATH=/home/pnidgunde/Code/git_projects/screen/src/install/bin:$PATH
+export PATH=/home/pnidgunde/Code/git_projects/CMake/build/bin:$PATH
+export PATH=/home/pnidgunde/Code/git_projects/ninja:$PATH
 
 # Z-lib ( For clang )
 export LIBRARY_PATH=/home/pnidgunde/Code/git_projects/zlib/install/lib:$LIBRARY_PATH
@@ -11,7 +13,7 @@ export LIBRARY_PATH=/home/pnidgunde/Code/git_projects/zlib/install/lib:$LIBRARY_
 export PATH=/home/pnidgunde/Code/git_projects/llvm/install/bin:$PATH
 
 # Aliases settings
-alias g++='/usr/bin/g++ -I/home/prashant/Code/cpp/include -g -std=c++1z -Wall -Werror -lpthread'
+alias g++='/usr/bin/g++ -I/home/prashant/Code/cpp/include -g -std=c++1z -Wall -Werror -pthread'
 alias gdb='/usr/bin/gdb -tui'
 alias c='clear'
 alias l='ls -ltr'
