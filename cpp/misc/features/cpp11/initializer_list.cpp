@@ -1,35 +1,27 @@
-#include <iostream>
-#include <initializer_list>
-#include <vector>
 #include <algorithm>
+#include <initializer_list>
+#include <iostream>
+#include <vector>
 
-class boVector
-{
-    private:
-        std::vector<int> vec;
-    public:
-    boVector(const std::initializer_list<int>& list) : vec(list)
-    {
+class boVector {
+private:
+  std::vector<int> vec;
 
+public:
+  boVector(const std::initializer_list<int> &list) : vec(list) {}
+
+  void print() {
+    // ranged for
+    for (auto const &elem : vec) {
+      std::cout << elem;
     }
-
-    void print()
-    {
-        // ranged for
-        for(auto const& elem : vec)
-        {
-            std::cout << elem;
-        }
-    }
-
+  }
 };
 
+int main() {
+  // Note that initializer list is passed in { }
+  boVector justlikeVector{1, 2, 3, 3, 4, 5};
+  justlikeVector.print();
 
-int main()
-{
-    // Note that initializer list is passed in { }
-    boVector justlikeVector{1,2,3,3,4,5};
-    justlikeVector.print();
-
-    return 0;
+  return 0;
 }

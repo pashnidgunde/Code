@@ -5,11 +5,11 @@
 //
 // Alternative approach : three way partitioning O(n)
 
-#include <vector>
 #include "algo/sort/counting_sort.h"
 #include "functors.h"
 #include "partition.h"
 #include "utils.h"
+#include <vector>
 
 void threeWayPartition(std::vector<int> v) {
   int begin = 0;

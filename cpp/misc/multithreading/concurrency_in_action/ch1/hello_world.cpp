@@ -2,24 +2,21 @@
 #include <thread>
 
 // thread function
-void helloFunction
-() { std::cout << "Hello from thread" << std::endl; }
+void helloFunction() { std::cout << "Hello from thread" << std::endl; }
 
 // thread functor
 class HelloFunctor {
-    public:
-      void operator()() {
-        std::cout << "Hello World from functor." << std::endl;
-      }
+public:
+  void operator()() { std::cout << "Hello World from functor." << std::endl; }
 };
 
-int main() { 
-    std::thread functThread(helloFunction);
-    functThread.join();
+int main() {
+  std::thread functThread(helloFunction);
+  functThread.join();
 
-    HelloFunctor functor;
-    std::thread functorThread(functor);
-    functorThread.join();
+  HelloFunctor functor;
+  std::thread functorThread(functor);
+  functorThread.join();
 
-    return 0;
+  return 0;
 }

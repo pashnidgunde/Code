@@ -1,21 +1,21 @@
 #include <iostream>
 
 class NonCopyable {
- public:
+public:
   NonCopyable(int data) : data_(data) {}
   NonCopyable(const NonCopyable &) = delete;
   NonCopyable &operator=(const NonCopyable &) = delete;
   NonCopyable(NonCopyable &&other) : data_(std::move(other.data_)) {}
 
- private:
+private:
   int data_;
 
- public:
+public:
   int getData() { return data_; }
 };
 
 class NonCopyableX : public NonCopyable {
- public:
+public:
   NonCopyableX(int data) : NonCopyable(data) {}
   NonCopyableX() = delete;
 };

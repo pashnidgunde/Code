@@ -7,17 +7,16 @@
 // Approach 3 : O(n) , use of unordered_map to hash count of occurances
 // Approach 4 : Boyer and Moore algorithm
 
-#include <algorithm.h>  // for partitioning
-#include <cassert>
-#include <unordered_map>
-#include <vector>
 #include "algorithm.h"
 #include "functors.h"
 #include "utils.h"
+#include <algorithm.h> // for partitioning
+#include <cassert>
+#include <unordered_map>
+#include <vector>
 
 // O(n*n)
-template <typename T>
-T majorityUsingCount(std::vector<T>& sequence) {
+template <typename T> T majorityUsingCount(std::vector<T> &sequence) {
   for (auto iter = sequence.begin(); iter != sequence.end(); iter++) {
     size_t count = 0u;
     for (auto innerIter = sequence.begin(); innerIter != sequence.end();
@@ -36,9 +35,9 @@ T majorityUsingCount(std::vector<T>& sequence) {
 }
 
 // O(n log n)
-template <typename T>
-T majorityUsingCountAfterSort(std::vector<T>& sequence) {
-  if (sequence.empty()) return -1;
+template <typename T> T majorityUsingCountAfterSort(std::vector<T> &sequence) {
+  if (sequence.empty())
+    return -1;
   pn::algo::countingSort(sequence.begin(), sequence.end(),
                          pn::functors::less<T>());
   auto iter = sequence.begin();
@@ -61,32 +60,32 @@ T majorityUsingCountAfterSort(std::vector<T>& sequence) {
 }
 
 // O(n)
-template <typename T>
-T majorityUsingUnorderedMap(std::vector<T>& sequence) {
+template <typename T> T majorityUsingUnorderedMap(std::vector<T> &sequence) {
   std::unordered_map<T, size_t> hashMap;
-  for (const auto& elem : sequence) {
+  for (const auto &elem : sequence) {
     hashMap[elem]++;
   }
 
-  for (const auto& elem : hashMap) {
-    if (elem.second > sequence.size() / 2) return elem.first;
+  for (const auto &elem : hashMap) {
+    if (elem.second > sequence.size() / 2)
+      return elem.first;
   }
 
   return -1;
 }
 
 // O(n) and constant space
-template <typename T>
-T majorityUsingBoyerMoore(std::vector<T>& sequence) {
+template <typename T> T majorityUsingBoyerMoore(std::vector<T> &sequence) {
   int prevElement = -1;
   size_t count = 0;
-  for (const auto& elem : sequence) {
+  for (const auto &elem : sequence) {
     if (0 == count) {
       prevElement = elem;
       count = 1;
     } else {
       (prevElement == elem) ? count++ : count--;
-      if (count > sequence.size() / 2) return elem;
+      if (count > sequence.size() / 2)
+        return elem;
     }
   }
 

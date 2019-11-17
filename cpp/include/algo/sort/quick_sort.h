@@ -1,7 +1,7 @@
 #pragma once
-#include <algorithm>  // For rest other algos
 #include "functors.h"
-#include "partition.h"  // For partition
+#include "partition.h" // For partition
+#include <algorithm>   // For rest other algos
 
 namespace pn {
 namespace algo {
@@ -27,5 +27,5 @@ void quickSort(Iter begin, Iter end, Op op) {
     quickSort(nextToPivot, end, op);
   }
 }
-}  // namespace algo
-}  // namespace pn
+} // namespace algo
+} // namespace pn

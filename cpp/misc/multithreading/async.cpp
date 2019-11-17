@@ -20,7 +20,7 @@ int main() {
   // the task might throw an exception
   try {
     std::cout << fut.get();
-  } catch (std::exception& e) {
+  } catch (std::exception &e) {
     std::cout << e.what() << std::endl;
   }
 

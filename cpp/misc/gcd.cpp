@@ -1,10 +1,10 @@
 #include <iostream>
 #include <vector>
 
-long long gcd_faster( long long a,  long long b) {
+long long gcd_faster(long long a, long long b) {
 
-  if ( a < b) 
-    std::swap(a,b);
+  if (a < b)
+    std::swap(a, b);
 
   if (a % b == 0)
     return b;
@@ -21,7 +21,7 @@ long long gcd_faster(std::vector<long long> &numbers) {
   return gcd;
 }
 
-int main(int , char *argv[]) {
+int main(int, char *argv[]) {
   auto n = atoi(argv[1]);
   std::vector<long long> numbers;
   for (auto i = 0; i < n; ++i) {

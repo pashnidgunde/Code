@@ -7,12 +7,12 @@
 // 2. Replace 0's with INT_MAX
 // 3. Merge both lists
 
-#include <limits.h>
-#include <vector>
 #include "algorithm.h"
 #include "functors.h"
 #include "swap.h"
 #include "utils.h"
+#include <limits.h>
+#include <vector>
 
 struct isZero {
   bool operator()(int input) { return input == 0; }
@@ -53,7 +53,7 @@ void mergeRangeAndKeepTheOrder(Iter begin1, Iter end1, Iter begin2, Iter end2) {
   }
 }
 
-void mergeRangeAndKeepTheOrder(std::vector<int>& v1, std::vector<int>& v2) {
+void mergeRangeAndKeepTheOrder(std::vector<int> &v1, std::vector<int> &v2) {
   mergeRangeAndKeepTheOrder(v1.begin(), v1.end(), v2.begin(), v2.end());
 }
 

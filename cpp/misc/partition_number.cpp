@@ -5,18 +5,10 @@
 
 #include <iostream>
 
-class Number
-{
-    public:
-        // Implement partition logic
-        static void partition(const int& N)
-        {
-            
-        }
+class Number {
+public:
+  // Implement partition logic
+  static void partition(const int &N) {}
 };
 
-
-int main()
-{
-    Number::partition(4);
-}
+int main() { Number::partition(4); }

@@ -6,26 +6,18 @@
  */
 
 #include <iostream>
-void value(int* ptr)
-{
-	*ptr = 0;
+void value(int *ptr) { *ptr = 0; }
+
+void value(const char *ptr) { *ptr = "hello1"; }
+
+int main() {
+  char *hello = "hello";
+  int x = 20;
+  int *ptr = &x;
+  value(ptr);
+  value(hello);
+  std::cout << x;
+  std::cout << *ptr;
+
+  return 0;
 }
-
-void value(const char* ptr)
-{
-	*ptr = "hello1";
-}
-
-int main()
-{
-	char *hello = "hello";
-	int x =20;
-	int *ptr =  &x;
-	value(ptr);
-	value(hello);
-	std::cout << x ;
-	std::cout << *ptr;
-
-	return 0;
-}
-
