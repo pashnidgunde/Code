@@ -13,8 +13,6 @@ class HelloFunctor {
       }
 };
 
-
-
 int main() { 
     std::thread functThread(helloFunction);
     functThread.join();
@@ -22,7 +20,6 @@ int main() {
     HelloFunctor functor;
     std::thread functorThread(functor);
     functorThread.join();
-
 
     return 0;
 }

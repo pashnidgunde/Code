@@ -23,18 +23,9 @@ std::string to_string(T first, const Rest &... rest) {
   return s.str();
 }
 
-int sum() { return 0; }
-
-template <typename First, typename... Rest>
-int sum(const First &first, const Rest &... rest) {
-  return first + sum(rest...);
-}
-
 int main() {
   std::cout << to_string(10) << std::endl;
   toString(1, 2, 2, 3, 4, 5, 5, 6, 6, 6, 6, 6, 6, 6);
   std::cout << to_string(1, "Hello", "5.5"
                                      "Done Done Done");
-
-  std::cout << sum(1, 2, 2, 3, 4, 4, 5, 5, 5, 5, 55);
 }
