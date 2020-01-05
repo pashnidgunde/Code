@@ -3,13 +3,15 @@
 
 namespace pn {
 namespace utils {
-template <typename Iter> static void print_container(Iter begin, Iter end) {
+template <typename Iter>
+static void print(Iter begin, Iter end) {
   while (begin != end) {
     std::cout << " " << *begin << " ";
     begin++;
   }
 
   std::cout << std::endl;
+<<<<<<< HEAD
 }
 
 template <template <typename, typename...> class ContainerType,
@@ -22,3 +24,5 @@ void print_container(const ContainerType<ValueType, Args...> &c) {
 }
 }
 }
+}  // namespace utils
+}  // namespace pn

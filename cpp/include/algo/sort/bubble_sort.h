@@ -1,5 +1,5 @@
-#include "functors.h"
 #include <algorithm>
+#include "functors.h"
 
 namespace pn {
 namespace algo {
@@ -18,3 +18,5 @@ static void bubbleSort(Iter begin, Iter end, Op op) {
 }
 }
 }
+}  // namespace algo
+}  // namespace pn
