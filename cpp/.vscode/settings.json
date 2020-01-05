@@ -31,6 +31,7 @@
         "ostream": "c",
         "ratio": "c",
         "system_error": "c",
-        "type_traits": "c"
+    },
+    "editor.formatOnSave": true
     }
 }

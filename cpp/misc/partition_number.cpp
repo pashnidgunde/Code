@@ -9,6 +9,7 @@ class Number {
 public:
   // Implement partition logic
   static void partition(const int &N) {}
+
 };
 
 int main() { Number::partition(4); }

@@ -22,19 +22,20 @@ template <typename T> T majorityUsingCount(std::vector<T> &sequence) {
     for (auto innerIter = sequence.begin(); innerIter != sequence.end();
          innerIter++) {
       if (*iter == *innerIter) {
+
         count++;
       }
-      if (count > (sequence.size() / 2)) {
-        return *iter;
+      if (count > max_vote_size) {
+        result = *iter;
+        return true;
       }
     }
   }
-
-  // TODO :  How to return a default type
-  return -1;
+  return false;
 }
 
 // O(n log n)
+
 template <typename T> T majorityUsingCountAfterSort(std::vector<T> &sequence) {
   if (sequence.empty())
     return -1;
@@ -42,24 +43,26 @@ template <typename T> T majorityUsingCountAfterSort(std::vector<T> &sequence) {
                          pn::functors::less<T>());
   auto iter = sequence.begin();
   auto prevElement = *iter;
+
   iter++;
-  auto count = 0u;
-  while (iter != sequence.end()) {
-    if (*iter == prevElement) {
+  auto count = 1u;
+  while (iter != end) {
+    if (*iter == prev_element) {
       count++;
-      if (count > sequence.size() / 2) {
-        return *iter;
+      if (count > max_vote_size) {
+        result = *iter;
+        return true;
       }
     } else {
-      count = 0;
-      prevElement = *iter;
+      count = 1;
+      prev_element = *iter;
     }
-    iter++;
+    std::advance(iter, 1);
   }
-  return -1;
+  return false;
 }
 
-// O(n)
+
 template <typename T> T majorityUsingUnorderedMap(std::vector<T> &sequence) {
   std::unordered_map<T, size_t> hashMap;
   for (const auto &elem : sequence) {
@@ -69,9 +72,10 @@ template <typename T> T majorityUsingUnorderedMap(std::vector<T> &sequence) {
   for (const auto &elem : hashMap) {
     if (elem.second > sequence.size() / 2)
       return elem.first;
+
   }
 
-  return -1;
+  return false;
 }
 
 // O(n) and constant space
@@ -87,23 +91,41 @@ template <typename T> T majorityUsingBoyerMoore(std::vector<T> &sequence) {
       if (count > sequence.size() / 2)
         return elem;
     }
-  }
 
-  return -1;
+    std::advance(begin, 1);
+  }
+  return false;
 }
 
 int main() {
   std::vector<int> v{1, 0, 0, 0, 0, 1, 2, 0, 0, 0, 1, 0};
-  assert(majorityUsingCount(v) == 0);
-  assert(majorityUsingCountAfterSort(v) == 0);
-  assert(majorityUsingUnorderedMap(v) == 0);
-  assert(majorityUsingBoyerMoore(v) == 0);
+  int result;
+  assert(majorityUsingCount(std::begin(v), std::end(v), result) == true);
+  assert(result == 0);
+
+  assert(majorityUsingCountAfterSort(std::begin(v), std::end(v), result) ==
+         true);
+  assert(result == 0);
+
+  assert(majorityUsingUnorderedMap(std::begin(v), std::end(v), result) == true);
+  assert(result == 0);
+
+  assert(majorityUsingBoyerMoore(std::begin(v), std::end(v), result) == true);
+  assert(result == 0);
 
   std::vector<int> v1{1, 2, 3, 4, 5};
-  assert(majorityUsingCount(v1) == -1);
-  assert(majorityUsingCountAfterSort(v1) == -1);
-  assert(majorityUsingUnorderedMap(v1) == -1);
-  assert(majorityUsingBoyerMoore(v1) == -1);
+  assert(majorityUsingCount(std::begin(v1), std::end(v1), result) == false);
+  assert(majorityUsingCountAfterSort(std::begin(v1), std::end(v1), result) ==
+         false);
+  assert(majorityUsingUnorderedMap(std::begin(v1), std::end(v1), result) ==
+         false);
+  assert(majorityUsingBoyerMoore(std::begin(v1), std::end(v1), result) ==
+         false);
+
+  std::vector<int> v2{1, 0, 1, 0, 1};
+  assert(majorityUsingBoyerMoore(std::begin(v2), std::end(v2), result) ==
+         false);
+  assert(result == 1);
 
   return 0;
 }

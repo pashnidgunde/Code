@@ -9,17 +9,18 @@
 
 #include "algorithm.h"
 #include "functors.h"
+#include "merge.h"
 #include "swap.h"
 #include "utils.h"
 #include <limits.h>
 #include <vector>
 
 struct isZero {
-  bool operator()(int input) { return input == 0; }
+  bool operator()(int input) { return 0 == input; }
 };
 
 template <typename Iter, typename Pred>
-void moveElementsToEndWithPartition(Iter begin, Iter end, Pred pred) {
+void moveToEndIf(Iter begin, Iter end, Pred pred) {
   std::advance(end, -1);
 
   while (begin != end) {
@@ -61,8 +62,8 @@ int main() {
   std::vector<int> v1{1, 0, 3, 0, 5, 0, 7};
   std::vector<int> v2{2, 4, 6};
 
-  moveElementsToEndWithPartition(v1.begin(), v1.end(), isZero());
+  moveToEndIf(v1.begin(), v1.end(), isZero());
   pn::algo::replace(v1.begin(), v1.end(), 0, INT_MAX);
-  mergeRangeAndKeepTheOrder(v1, v2);
-  pn::utils::print<std::vector<int>::iterator>(std::begin(v1), std::end(v1));
+  mergeRangeAndKeepTheOrderInAsceding(v1, v2);
+  pn::utils::print(std::begin(v1), std::end(v1));
 }
