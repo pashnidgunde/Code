@@ -1,3 +1,8 @@
+std::function -->std::bad_func_call
+CopyConstructible
+CopyAssignable
+std::bind
+
 std::regex
 std::enable_if
 std::accumulate

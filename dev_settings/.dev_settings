@@ -24,3 +24,8 @@ export PS1="\u@\h \[\033[32m\]\$PWD\[\033[33m\]\$(parse_git_branch)\[\033[00m\] 
 
 alias clone_code='git clone -b master git@github.com:pashnidgunde/Code.git'
 alias python='/usr/bin/python3'
+
+findf()
+{
+find . -name $1
+}
