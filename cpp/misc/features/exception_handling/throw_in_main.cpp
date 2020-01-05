@@ -1,9 +1,3 @@
 #include <iostream>
 
-
-int main()
-{
-
-    throw 0;
-
-}
+int main() { throw 0; }

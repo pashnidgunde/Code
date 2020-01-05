@@ -1,15 +1,15 @@
 
-#include <stdlib.h>
 #include <cassert>
 #include <iostream>
+#include <stdlib.h>
 #include <unordered_map>
 #include <vector>
 
 // http://www.techiedelight.com/find-largest-sub-array-formed-by-consecutive-integers/
 
 class MaxUniqueSubArray {
- public:
-  static std::pair<int, int> find(const std::vector<int>& v) {
+public:
+  static std::pair<int, int> find(const std::vector<int> &v) {
     std::unordered_map<int, int> m;
     auto size = v.size();
     auto count = 0, max_count = 0, begin = 0, end = (int)size - 1;

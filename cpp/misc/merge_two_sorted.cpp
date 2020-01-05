@@ -8,12 +8,12 @@
 // After swap, emplace the element in second range such that order is not
 // broken.
 
-#include <vector>
 #include "functors.h"
 #include "merge.h"
 #include "reverse.h"
 #include "swap.h"
 #include "utils.h"
+#include <vector>
 
 void mergeRangeAndKeepTheOrderInAsceding(std::vector<int>& v1,
                                          std::vector<int>& v2) {
@@ -22,13 +22,8 @@ void mergeRangeAndKeepTheOrderInAsceding(std::vector<int>& v1,
                                       std::greater<>());
 }
 
-void mergeRangeAndKeepTheOrderInDescending(std::vector<int>& v1,
-                                           std::vector<int>& v2) {
-  pn::algo::reverse(v1.begin(), v1.end());
-  pn::algo::reverse(v2.begin(), v2.end());
-  pn::algo::mergeRangeAndKeepTheOrder(v1.begin(), v1.end(), v2.begin(),
-                                      v2.end(), std::greater<>(),
-                                      std::less<>());
+void mergeRangeAndKeepTheOrder(std::vector<int> &v1, std::vector<int> &v2) {
+  mergeRangeAndKeepTheOrder(v1.begin(), v1.end(), v2.begin(), v2.end());
 }
 
 int main() {

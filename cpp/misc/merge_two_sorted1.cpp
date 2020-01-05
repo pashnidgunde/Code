@@ -7,13 +7,13 @@
 // 2. Replace 0's with INT_MAX
 // 3. Merge both lists
 
-#include <limits.h>
-#include <vector>
 #include "algorithm.h"
 #include "functors.h"
 #include "merge.h"
 #include "swap.h"
 #include "utils.h"
+#include <limits.h>
+#include <vector>
 
 struct isZero {
   bool operator()(int input) { return 0 == input; }
@@ -33,11 +33,29 @@ void moveToEndIf(Iter begin, Iter end, Pred pred) {
   }
 }
 
-void mergeRangeAndKeepTheOrderInAsceding(std::vector<int>& v1,
-                                         std::vector<int>& v2) {
-  pn::algo::mergeRangeAndKeepTheOrder(v1.begin(), v1.end(), v2.begin(),
-                                      v2.end(), std::less<>(),
-                                      std::greater<>());
+template <typename Iter>
+void mergeRangeAndKeepTheOrder(Iter begin1, Iter end1, Iter begin2, Iter end2) {
+  while (begin1 != end1) {
+    auto begin2Temp = begin2;
+    // TODO : How do i get a type from the Iterator
+    if (pn::functors::less<int>()(*begin2Temp, *begin1)) {
+      pn::algo::swap(*begin1, *begin2);
+      while ((begin2Temp + 1) != end2) {
+        // TODO : How do i get a type from the Iterator
+        if (pn::functors::greater<int>()(*begin2Temp, *(begin2Temp + 1))) {
+          pn::algo::swap(*begin2Temp, *(begin2Temp + 1));
+          std::advance(begin2Temp, 1);
+        } else {
+          break;
+        }
+      }
+    }
+    std::advance(begin1, 1);
+  }
+}
+
+void mergeRangeAndKeepTheOrder(std::vector<int> &v1, std::vector<int> &v2) {
+  mergeRangeAndKeepTheOrder(v1.begin(), v1.end(), v2.begin(), v2.end());
 }
 
 int main() {

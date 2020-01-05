@@ -16,12 +16,12 @@ void countingSort(Iter begin, Iter end, Op op) {
     std::advance(begin, 1);
   }
 
-  for (const auto& elem : countOfElements) {
+  for (const auto &elem : countOfElements) {
     for (auto i = elem.second; i > 0; --i) {
       *beginOrig = elem.first;
       std::advance(beginOrig, 1);
     }
   }
 }
-}  // namespace algo
-}  // namespace pn
+} // namespace algo
+} // namespace pn

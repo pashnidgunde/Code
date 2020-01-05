@@ -13,7 +13,8 @@ struct Node {
 };
 
 void print(Node *node) {
-  if (node == NULL) return;
+  if (node == NULL)
+    return;
 
   // now deal with the node
   printf("%d ", node->data);
@@ -40,7 +41,8 @@ int heightOfTree(Node *node) {
 }
 
 void printLevel(Node *node, int height) {
-  if (node == nullptr) return;
+  if (node == nullptr)
+    return;
   if (height == 1)
     std::cout << node->data << "-->";
   else {

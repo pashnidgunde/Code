@@ -13,7 +13,8 @@ struct Node {
 };
 
 void print(Node *node) {
-  if (node == NULL) return;
+  if (node == NULL)
+    return;
 
   // now deal with the node
   printf("%d ", node->data);
@@ -63,7 +64,8 @@ Node *listptr = nullptr;
 Node *startNode = nullptr;
 
 void createListInOrder(Node *root) {
-  if (root == nullptr) return;
+  if (root == nullptr)
+    return;
 
   createListInOrder(root->left);
 
@@ -79,7 +81,8 @@ void createListInOrder(Node *root) {
 }
 
 void createListPreOrder(Node *root) {
-  if (root == nullptr) return;
+  if (root == nullptr)
+    return;
 
   if (listptr == nullptr) {
     listptr = root;
@@ -94,7 +97,8 @@ void createListPreOrder(Node *root) {
 }
 
 void createListPostOrder(Node *root) {
-  if (root == nullptr) return;
+  if (root == nullptr)
+    return;
 
   createListPostOrder(root->left);
   createListPostOrder(root->right);

@@ -11,8 +11,8 @@ long long MaxPairwiseProduct(const vector<int> &numbers) {
   int n = numbers.size();
   for (int i = 0; i < n; ++i) {
     for (int j = i + 1; j < n; ++j) {
-      auto temp = (long long) (numbers[i]) * numbers[j];
-      if ( temp > result) {
+      auto temp = (long long)(numbers[i]) * numbers[j];
+      if (temp > result) {
         result = temp;
       }
     }
@@ -77,11 +77,11 @@ int main() {
     long long number1 = MaxPairwiseProductFast(numbers);
     long long number2 = MaxPairwiseProduct(numbers);
 
-    if ( number1 != number2 ) {
+    if (number1 != number2) {
       std::cout << "Failed" << std::endl;
       std::cout << "N :: " << n << std::endl;
       std::cout << "Numbers ::" << std::endl;
-      
+
       for (const auto &number : numbers) {
         std::cout << number << " " << std::endl;
       }

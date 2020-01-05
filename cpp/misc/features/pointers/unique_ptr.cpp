@@ -9,35 +9,16 @@
  * This will not compile
  */
 
-
-#include <vector>
 #include <memory>
 #include <string>
+#include <vector>
 
-class X
-{
+class X {};
 
-};
+// std::vector<std::unique_ptr<X>> vec = { unique_ptr<X> { new X{} } };
 
-//std::vector<std::unique_ptr<X>> vec = { unique_ptr<X> { new X{} } };
+std::vector<std::unique_ptr<std::string>> vs{
+    std::unique_ptr<std::string>{new std::string{"Doug"}},
+    std::unique_ptr<std::string>{new std::string{"Adams"}}};
 
-
-std::vector<std::unique_ptr<std::string>> vs {
-    std::unique_ptr<std::string>{ new std::string{"Doug"} },
-    std::unique_ptr<std::string>{ new std::string{"Adams"} }
-};
-
-
-
-
-int main()
-{
-
-
-
-}
-
-
-
-
-
+int main() {}

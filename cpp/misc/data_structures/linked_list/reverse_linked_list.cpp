@@ -18,7 +18,7 @@ class LinkedList {
   Node *begin;
   Node *end;
 
- public:
+public:
   LinkedList() : begin(nullptr), end(nullptr) {}
 
   void reverse() {

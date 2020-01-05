@@ -1,41 +1,33 @@
-#include <iostream>
 #include <cassert>
-#include <thread>
+#include <iostream>
 #include <mutex>
+#include <thread>
 
-class Singleton
-{
-    private:
-        Singleton() = default;
-        ~Singleton() = default;
+class Singleton {
+private:
+  Singleton() = default;
+  ~Singleton() = default;
 
-        static Singleton *instance;
-        std::mutex _m;
+  static Singleton *instance;
+  std::mutex _m;
 
-    public:
-        static Singleton* getInstance()
-        {
-            if (nullptr == instance)
-            {
-                std::lock_guard<mutex> (m);
-                if (nullptr == instance)
-                    instance = new Singleton();
-            }
+public:
+  static Singleton *getInstance() {
+    if (nullptr == instance) {
+      std::lock_guard<mutex>(m);
+      if (nullptr == instance)
+        instance = new Singleton();
+    }
 
-            return instance;
-        }
-
-        
+    return instance;
+  }
 };
 
-Singleton* Singleton::instance = nullptr;
+Singleton *Singleton::instance = nullptr;
 
+int main() {
+  Singleton *s = Singleton::getInstance();
+  Singleton *s1 = Singleton::getInstance();
 
-int main()
-{
-    Singleton *s = Singleton::getInstance();
-    Singleton *s1 = Singleton::getInstance();
-
-    assert(s == s1);
-
+  assert(s == s1);
 }

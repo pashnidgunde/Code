@@ -4,7 +4,7 @@
 #include <string>
 using namespace std;
 
-int combination(const std::string& str) {
+int combination(const std::string &str) {
   auto size = str.size();
   auto count = 0;
   for (auto i = 0; i < size; i++) {
@@ -20,7 +20,7 @@ int combination(const std::string& str) {
   return count;
 }
 
-int main(int argc, char** argv) {
+int main(int argc, char **argv) {
   string str = "9688";
   auto count = combination(str);
   std::cout << count % int(pow(10, 9) + 7);

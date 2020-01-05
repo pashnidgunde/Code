@@ -4,14 +4,13 @@ number  should be greater than its left number and right number */
 // Solution 1 : Sort numbers and revisit numbers  -- > O(N log N)
 // Solution 2 : Visit number once to determine swap --> O(N)
 
-#include <array>
-#include <vector>
 #include "algorithm.h"
 #include "functors.h"
 #include "utils.h"
+#include <array>
+#include <vector>
 
-template <typename Iter>
-void rearrange_naive(Iter begin, Iter end) {
+template <typename Iter> void rearrange_naive(Iter begin, Iter end) {
   pn::algo::quickSort(begin, end, pn::functors::less<int>());
   while (begin + 2 != end) {
     pn::algo::swap(*(begin + 1), *(begin + 2));
@@ -19,17 +18,18 @@ void rearrange_naive(Iter begin, Iter end) {
   }
 }
 
-template <typename Iter>
-void rearrange_efficient(Iter begin, Iter end) {
+template <typename Iter> void rearrange_efficient(Iter begin, Iter end) {
   while (true) {
-    if (begin == end || begin + 1 == end) break;
+    if (begin == end || begin + 1 == end)
+      break;
 
     if (*(begin) > *(begin + 1)) {
       std::swap(*begin, *(begin + 1));
     }
 
     std::advance(begin, 1);
-    if (begin == end || begin + 1 == end) break;
+    if (begin == end || begin + 1 == end)
+      break;
     std::swap(*(begin + 1), *(begin + 2));
     std::advance(begin, 1);
   }

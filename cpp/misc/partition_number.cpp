@@ -6,9 +6,10 @@
 #include <iostream>
 
 class Number {
- public:
+public:
   // Implement partition logic
-  static void partition(const int& N) {}
+  static void partition(const int &N) {}
+
 };
 
 int main() { Number::partition(4); }
