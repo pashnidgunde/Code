@@ -18,7 +18,7 @@ class FileHandler {
 
   void open_file() { ofstream f("./data.txt") }
 
-  void write_to_file(char* data) {
+  void write_to_file(char *data) {
     // This will be called only once from all threads
     std::call_once(f, open_file);
 

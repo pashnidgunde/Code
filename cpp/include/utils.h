@@ -11,6 +11,18 @@ static void print(Iter begin, Iter end) {
   }
 
   std::cout << std::endl;
+<<<<<<< HEAD
+}
+
+template <template <typename, typename...> class ContainerType,
+          typename ValueType, typename... Args>
+void print_container(const ContainerType<ValueType, Args...> &c) {
+  for (const auto &v : c) {
+    std::cout << v << ' ';
+  }
+  std::cout << '\n';
+}
+}
 }
 }  // namespace utils
 }  // namespace pn

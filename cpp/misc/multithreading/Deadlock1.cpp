@@ -17,52 +17,44 @@
  * 4. Avoid lock and unlock and ( instead use scoped_lock  or lock_guard )
  */
 
-
-#include <iostream>
-#include <thread>
-#include <mutex>
 #include <algorithm>
+#include <iostream>
+#include <mutex>
+#include <thread>
 
 std::mutex m;
 std::mutex m1;
 
-void thread_function(std::string s)
-{
-	m.lock();
-	for ( int i = 0 ; i< 10000;i++)
-	{
-		// do nothing , just increment
-		i++;
-	}
-	m1.lock();
+void thread_function(std::string s) {
+  m.lock();
+  for (int i = 0; i < 10000; i++) {
+    // do nothing , just increment
+    i++;
+  }
+  m1.lock();
 }
 
-void thread1_function(std::string s)
-{
-	m1.lock();
-	for ( int i = 0 ; i< 10000;i++) {
-		i++;
-	}
-	
-	std::cout << s;
-	
-	
-	m.lock();
+void thread1_function(std::string s) {
+  m1.lock();
+  for (int i = 0; i < 10000; i++) {
+    i++;
+  }
 
-    std::reverse(s.begin(),s.end());
-	
-	std::cout << s;
+  std::cout << s;
+
+  m.lock();
+
+  std::reverse(s.begin(), s.end());
+
+  std::cout << s;
 }
 
+int main() {
+  // standard way to create a thread
 
-int main()
-{
-    // standard way to create a thread
-    
-    std::thread thread_with_thread_function(thread_function, "hello");
-    thread_with_thread_function.join();
+  std::thread thread_with_thread_function(thread_function, "hello");
+  thread_with_thread_function.join();
 
-	std::thread thread_with_thread1_function(thread1_function, "hows life");
-    thread_with_thread1_function.join();
+  std::thread thread_with_thread1_function(thread1_function, "hows life");
+  thread_with_thread1_function.join();
 }
-

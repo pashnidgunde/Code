@@ -8,14 +8,15 @@
 #include <vector>
 
 class BinarySortInLinearTime {
- public:
+public:
   // Complexity : O(N)
-  static void sort(std::vector<int>& v) {
+  static void sort(std::vector<int> &v) {
     auto size = v.size();
     auto count = 0u;
 
-    for (const auto& elem : v) {
-      if (elem == 1) count++;
+    for (const auto &elem : v) {
+      if (elem == 1)
+        count++;
     }
 
     for (auto i = 0u; i < size; ++i) {
@@ -24,11 +25,12 @@ class BinarySortInLinearTime {
   }
 
   // Linear time sort
-  static void sort_efficient(std::vector<int>& v) {
+  static void sort_efficient(std::vector<int> &v) {
     auto i = 0u, j = 0u;
     const auto size = v.size();
     for (i = 0; i < size; ++i) {
-      if (v[i] == 1) v[j++] = 1;
+      if (v[i] == 1)
+        v[j++] = 1;
     }
 
     while (j < size) {
@@ -36,16 +38,17 @@ class BinarySortInLinearTime {
     }
   }
 
-  static void print(const std::vector<int>& v) {
-    for (const auto element : v) std::cout << element << " ";
+  static void print(const std::vector<int> &v) {
+    for (const auto element : v)
+      std::cout << element << " ";
 
     std::cout << std::endl;
   }
 };
 
 class RearrangeOddEvenInLinearTime {
- public:
-  static void arrange(std::vector<int>& v) {
+public:
+  static void arrange(std::vector<int> &v) {
     auto j = 0u;
     auto size = v.size();
 

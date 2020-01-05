@@ -8,8 +8,8 @@
 #include <iostream>
 #include <vector>
 
-std::vector<int>::reverse_iterator find_end(std::vector<int>& v,
-                                            std::vector<int>& f) {
+std::vector<int>::reverse_iterator find_end(std::vector<int> &v,
+                                            std::vector<int> &f) {
   typedef std::vector<int>::reverse_iterator Iter;
 
   Iter rbv = v.rbegin();

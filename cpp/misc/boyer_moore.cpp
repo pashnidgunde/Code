@@ -7,22 +7,22 @@
 // Approach 3 : O(n) , use of unordered_map to hash count of occurances
 // Approach 4 : Boyer and Moore algorithm
 
-#include <algorithm.h>  // for partitioning
-#include <cassert>
-#include <unordered_map>
-#include <vector>
 #include "algorithm.h"
 #include "functors.h"
 #include "utils.h"
+#include <algorithm.h> // for partitioning
+#include <cassert>
+#include <unordered_map>
+#include <vector>
 
 // O(n*n)
-template <typename Iter, typename ResultType>
-bool majorityUsingCount(Iter begin, Iter end, ResultType& result) {
-  size_t max_vote_size = std::distance(begin, end) / 2;
-  for (auto iter = begin; iter != end; iter++) {
-    size_t count = 1u;
-    for (auto inner_iter = begin; inner_iter != end; inner_iter++) {
-      if (*iter == *inner_iter) {
+template <typename T> T majorityUsingCount(std::vector<T> &sequence) {
+  for (auto iter = sequence.begin(); iter != sequence.end(); iter++) {
+    size_t count = 0u;
+    for (auto innerIter = sequence.begin(); innerIter != sequence.end();
+         innerIter++) {
+      if (*iter == *innerIter) {
+
         count++;
       }
       if (count > max_vote_size) {
@@ -35,14 +35,15 @@ bool majorityUsingCount(Iter begin, Iter end, ResultType& result) {
 }
 
 // O(n log n)
-template <typename Iter, typename ResultType>
-bool majorityUsingCountAfterSort(Iter begin, Iter end, ResultType& result) {
-  size_t max_vote_size = std::distance(begin, end) / 2;
-  // sort with O(n)
-  // pn::algo::countingSort(begin, end, pn::functors::less<T>());
-  std::sort(begin, end, pn::functors::less<ResultType>());
-  auto iter = begin;
-  auto prev_element = *iter;
+
+template <typename T> T majorityUsingCountAfterSort(std::vector<T> &sequence) {
+  if (sequence.empty())
+    return -1;
+  pn::algo::countingSort(sequence.begin(), sequence.end(),
+                         pn::functors::less<T>());
+  auto iter = sequence.begin();
+  auto prevElement = *iter;
+
   iter++;
   auto count = 1u;
   while (iter != end) {
@@ -61,47 +62,34 @@ bool majorityUsingCountAfterSort(Iter begin, Iter end, ResultType& result) {
   return false;
 }
 
-// O(n)
-template <typename Iter, typename ResultType>
-bool majorityUsingUnorderedMap(Iter begin, Iter end, ResultType& result) {
-  size_t max_vote_size = std::distance(begin, end) / 2;
-  std::unordered_map<ResultType, size_t> hashMap;
-  while (begin != end) {
-    hashMap[*begin]++;
-    std::advance(begin, 1);
+
+template <typename T> T majorityUsingUnorderedMap(std::vector<T> &sequence) {
+  std::unordered_map<T, size_t> hashMap;
+  for (const auto &elem : sequence) {
+    hashMap[elem]++;
   }
 
-  for (const auto& elem : hashMap) {
-    if (elem.second > max_vote_size) {
-      result = elem.first;
-      return true;
-    }
+  for (const auto &elem : hashMap) {
+    if (elem.second > sequence.size() / 2)
+      return elem.first;
+
   }
 
   return false;
 }
 
 // O(n) and constant space
-// 1,2,3,4,5
-
-template <typename Iter, typename ResultType>
-bool majorityUsingBoyerMoore(Iter begin, Iter end, ResultType& result) {
-  size_t max_vote_size = std::distance(begin, end) / 2;
-  size_t count = 0u;
-  Iter prev_element = begin;
-  while (begin != end) {
-    // when count reaches zero make sure to begin again
-    // from current location
-    if (count == 0) {
-      prev_element = begin;
+template <typename T> T majorityUsingBoyerMoore(std::vector<T> &sequence) {
+  int prevElement = -1;
+  size_t count = 0;
+  for (const auto &elem : sequence) {
+    if (0 == count) {
+      prevElement = elem;
       count = 1;
     } else {
-      // continue looking for next element
-      (*prev_element == *begin) ? count++ : count--;
-      if (count > max_vote_size) {
-        result = *begin;
-        return true;
-      }
+      (prevElement == elem) ? count++ : count--;
+      if (count > sequence.size() / 2)
+        return elem;
     }
 
     std::advance(begin, 1);

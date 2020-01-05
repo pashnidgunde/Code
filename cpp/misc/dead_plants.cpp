@@ -33,7 +33,7 @@ int main() {
     }
 
     if (deaths) {
-      for (const auto& plant : dead_plants) {
+      for (const auto &plant : dead_plants) {
         auto iter = std::find(v.begin(), v.end(), plant);
         v.erase(iter);
       }

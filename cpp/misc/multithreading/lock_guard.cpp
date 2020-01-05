@@ -1,7 +1,6 @@
-#include <thread>
 #include <iostream>
 #include <mutex>
-
+#include <thread>
 
 std::mutex m;
 
@@ -18,38 +17,30 @@ void print(const std::string& message, int i)
 }
 */
 
-void print (const std::string& message , int i)
-{
-	std::lock_guard<std::mutex> guard(m);
+void print(const std::string &message, int i) {
+  std::lock_guard<std::mutex> guard(m);
 
-	// Note that even if its scope locked, the cout object itself
-	// is global and hence need a better version for locking this global
-	// variable cout.
-	// Check shared_logger.cpp
-	std::cout << message << " " << i << std::endl;
+  // Note that even if its scope locked, the cout object itself
+  // is global and hence need a better version for locking this global
+  // variable cout.
+  // Check shared_logger.cpp
+  std::cout << message << " " << i << std::endl;
 }
 
 /* Synchronized fun */
-void fun()
-{
-    for (int i=0;i< 100;i++)
-    {
-        print("From Fun " , i);
-    }
-
+void fun() {
+  for (int i = 0; i < 100; i++) {
+    print("From Fun ", i);
+  }
 }
 
-int main()
-{
-    // This is fine
-    std::thread t1(fun);
+int main() {
+  // This is fine
+  std::thread t1(fun);
 
-    for (int i=0;i<100;i++)
-    {
-        print("From Main" , i);
-    }
+  for (int i = 0; i < 100; i++) {
+    print("From Main", i);
+  }
 
-
-    t1.join();
-}    
-
+  t1.join();
+}

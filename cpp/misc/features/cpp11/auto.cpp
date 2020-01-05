@@ -1,8 +1,8 @@
 #include <iostream>
 
 int main() {
-  auto i = 0;    // int
-  auto j = 5.0;  // double
+  auto i = 0;   // int
+  auto j = 5.0; // double
 
   std::vector<int> vec { 1, 2, 2, 3, 0 }
 

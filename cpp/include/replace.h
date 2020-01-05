@@ -11,5 +11,5 @@ void replace(Iter begin, Iter end, T oldValue, T newValue) {
     std::advance(begin, 1);
   }
 }
-}  // namespace algo
-}  // namespace pn
+} // namespace algo
+} // namespace pn

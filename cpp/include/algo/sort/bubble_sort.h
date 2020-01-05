@@ -16,5 +16,7 @@ static void bubbleSort(Iter begin, Iter end, Op op) {
     }
   }
 }
+}
+}
 }  // namespace algo
 }  // namespace pn

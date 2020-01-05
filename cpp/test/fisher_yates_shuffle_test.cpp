@@ -1,10 +1,10 @@
 // Program to test random shuffling of vector elements
 
-#include <vector>
 #include "algorithm.h"
 #include "utils.h"
+#include <vector>
 
-void shuffleUsingFisherYatesAlgo(std::vector<int>& v) {
+void shuffleUsingFisherYatesAlgo(std::vector<int> &v) {
   shuffleUsingFisherYatesAlgo(v.begin(), v.end());
 }
 

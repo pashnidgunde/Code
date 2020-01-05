@@ -6,12 +6,12 @@
 //
 // This can be achieved with partition as well
 //
-#include <algorithm.h>  // for partitioning
-#include <vector>
 #include "algorithm.h"
 #include "utils.h"
+#include <algorithm.h> // for partitioning
+#include <vector>
 
-void moveElementsToEnd(std::vector<int>& v, int element) {
+void moveElementsToEnd(std::vector<int> &v, int element) {
   size_t size = v.size();
   auto k = 0u;
   for (auto i = 0u; i < size; ++i) {
@@ -38,7 +38,7 @@ struct isFour {
 };
 
 template <typename Pred>
-void moveElementsToEndWithPartition(std::vector<int>& v, Pred pred) {
+void moveElementsToEndWithPartition(std::vector<int> &v, Pred pred) {
   auto begin = std::begin(v);
   auto end = std::end(v);
 

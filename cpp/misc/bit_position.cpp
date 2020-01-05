@@ -10,7 +10,8 @@
 int position_of_set_bit(int number) {
   auto position = 0;
   while (number) {
-    if ((number & 1)) break;
+    if ((number & 1))
+      break;
     number = number >> 1;
     position++;
   }

@@ -23,8 +23,7 @@ std::vector<int>::const_iterator mismatch(const std::vector<int>& v,
 }
 
 */
-template <class Iter>
-Iter mismatch(Iter ib, Iter ie, Iter ib1, Iter ib2) {
+template <class Iter> Iter mismatch(Iter ib, Iter ie, Iter ib1, Iter ib2) {
   while ((*ib == *ib1) && (ib != ie && ib1 != ib2)) {
     ib++;
     ib1++;

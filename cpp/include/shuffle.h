@@ -6,9 +6,9 @@
 //	j = random integer such that 0 <= j <=i
 //	exchange a[i] and a[j]
 
+#include "swap.h"
 #include <stdlib.h>
 #include <time.h>
-#include "swap.h"
 
 template <typename Iter>
 void shuffleUsingFisherYatesAlgo(Iter begin, Iter end) {
