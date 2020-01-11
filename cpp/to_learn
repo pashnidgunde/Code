@@ -1,3 +1,21 @@
+-------------------------------------------------------------------------------------
+Features and Code
+-------------------------------------------------------------------------------------
+T
+templates :
+        ./cpp/misc/features/cpp11/templates/*
+
+V        
+Variadic templates :
+        ./cpp/misc/features/cpp11/templates/variadic_*
+
+
+
+
+
+
+
+
 std::function -->std::bad_func_call
 CopyConstructible
 CopyAssignable
@@ -32,3 +50,5 @@ Abseil
 full specialization of functions
 template specialization : full specialization
 template specialization : partial specialization
+
+
