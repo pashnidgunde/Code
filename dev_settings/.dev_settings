@@ -16,7 +16,7 @@ export LIBRARY_PATH=/home/pnidgunde/Code/git_projects/zlib/install/lib:$LIBRARY_
 export PATH=/home/pnidgunde/Code/git_projects/llvm/install/bin:$PATH
 
 # Aliases settings
-#alias g++='/usr/bin/g++ -I/home/prashant/Code/cpp/include -g -std=c++1z -Wall -Werror -pthread'
+alias g++='/usr/bin/g++ -I/home/prashant/Code/cpp/include -g -std=c++1z -Wall -Werror -pthread'
 alias gdb='/usr/bin/gdb -tui'
 alias c='clear'
 alias l='ls -ltr'
