@@ -51,5 +51,17 @@ int main() {
   std::for_each(std::begin(v), std::end(v), [&total](int x) { total += x; });
   std::cout << total << std::endl;
 
+  auto lambda_capture_all_locals_by_value_and_ref = [x, &y]() {
+    y++;
+    std::cout << "Lambda with all locals captured. x= " << x << ", y = " << y
+              << std::endl;
+  };
+  lambda_capture_all_locals_by_value_and_ref();
+
+  std::vector<int> v{1, 2, 3, 4, 5};
+  auto lambda_with_condition = [](int x) { return x > 3; };
+  auto it = std::find_if(std::cbegin(v), std::cend(v), lambda_with_condition);
+  std::cout << ((it != std::cend(v)) ? "found" : " not found") << std::endl;
+
   return 0;
 }

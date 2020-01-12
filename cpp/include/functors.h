@@ -42,7 +42,7 @@ template <typename T> struct equal {
 template <typename T> struct equal<T *> {
   bool operator()(const T *a, const T *b) { return *a == *b; }
 };
-} // namespace functors
-} // namespace pn
+}
+}
 
 #endif

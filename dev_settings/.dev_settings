@@ -5,6 +5,9 @@ export PATH=/home/pnidgunde/Code/git_projects/screen/src/install/bin:$PATH
 export PATH=/home/pnidgunde/Code/git_projects/CMake/build/bin:$PATH
 export PATH=/home/pnidgunde/Code/git_projects/ninja:$PATH
 
+export PATH=/home/pnidgunde/Code/git_projects/build/bin:$PATH # clang-tidy
+export PATH=/home/pnidgunde/Code/git_projects/llvm/tools/clang/tools/extra/clang-tidy/tool:$PATH #run-clang-tidy
+
 # Z-lib ( For clang )
 export LIBRARY_PATH=/home/pnidgunde/Code/git_projects/zlib/install/lib:$LIBRARY_PATH
 #export PATH=/home/pnidgunde/Code/git_projects/zlib/install/lib:$PATH
