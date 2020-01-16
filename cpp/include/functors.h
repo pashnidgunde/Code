@@ -11,6 +11,8 @@ template <typename T> struct less<T *> {
   bool operator()(const T *a, const T *b) { return *a < *b; }
 };
 
+// TO DO const char*
+
 template <typename T> struct greater {
   bool operator()(const T &lhs, const T &rhs) { return lhs > rhs; }
 };
@@ -42,7 +44,7 @@ template <typename T> struct equal {
 template <typename T> struct equal<T *> {
   bool operator()(const T *a, const T *b) { return *a == *b; }
 };
-}
-}
+} // namespace functors
+} // namespace pn
 
 #endif

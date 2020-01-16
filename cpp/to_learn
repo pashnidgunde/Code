@@ -9,10 +9,12 @@ V
 Variadic templates :
         ./cpp/misc/features/cpp11/templates/variadic_*
 
+S
+std::exchange :
+        ./cpp/misc/std/exchange.cpp
 
-
-
-
+std::exchange
+use std::exchange in stateful lambdas
 
 
 

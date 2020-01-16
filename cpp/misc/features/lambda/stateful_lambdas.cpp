@@ -1,18 +1,9 @@
 #include <iostream>
 #include <memory>
 
-int fibonacci() {
-  static int i = 0;
-  static int j = 1;
-  if (i == 0)
-    return 0;
-  if (j == 1)
-    return 1;
-  temp = i + j;
-  i = j;
-  j = temp;
-  return temp;
-}
+// Stateful lambda is nothing but somthing that is captured in [] with values
+// are treated like static variables. As static variables maintain their state,
+// stateful lambdas can maintain state of their variables
 
 int main() {
 
@@ -35,12 +26,31 @@ int main() {
 
   // Non copyable stateful lambdas
   // not mutiple catpures
-  auto non_copyable = [y = 0, ptr = std::make_unique<int>(10)]() {
+  auto non_copyable = [ y = 0, ptr = std::make_unique<int>(10) ]() {
     std::cout << "Y : " << y << " and , *ptr =" << *ptr << std::endl;
   };
   // auto copy = non_coyable;--> compilation error
 
   // stateful lambda that calculates fibonacci sequence
+
+  auto fibonacci_per_call = [ first = 0, second = 1 ]() mutable->int {
+    // traditional approach
+    // auto temp = first + second;
+    // first = second;
+    // second = temp;
+    // return temp;
+
+    // with std::exchange
+    first = std::exchange(second, first + second);
+    return first;
+  };
+
+  std::cout << fibonacci_per_call() << std::endl;
+  std::cout << fibonacci_per_call() << std::endl;
+  std::cout << fibonacci_per_call() << std::endl;
+  std::cout << fibonacci_per_call() << std::endl;
+  std::cout << fibonacci_per_call() << std::endl;
+  std::cout << fibonacci_per_call() << std::endl;
 
   return 0;
 }
