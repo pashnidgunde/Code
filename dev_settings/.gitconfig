@@ -4,4 +4,4 @@
 [push]
 	default = current
 [credential]
-	helper = wincred
+	helper = cache
