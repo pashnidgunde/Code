@@ -1,6 +1,10 @@
 -------------------------------------------------------------------------------------
 Features and Code
 -------------------------------------------------------------------------------------
+L
+lambdas :
+        ./cpp/misc/features/lambda/*
+
 T
 templates :
         ./cpp/misc/features/cpp11/templates/*
@@ -12,10 +16,6 @@ Variadic templates :
 S
 std::exchange :
         ./cpp/misc/std/exchange.cpp
-
-std::exchange
-use std::exchange in stateful lambdas
-
 
 
 std::function -->std::bad_func_call
