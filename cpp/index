@@ -1,0 +1,20 @@
+-------------------------------------------------------------------------------------
+Features and Code
+-------------------------------------------------------------------------------------
+L
+lambdas :
+        ./cpp/features/lambda/*
+
+T
+templates :
+        ./cpp/features/cpp11/templates/*
+
+V        
+Variadic templates :
+        ./cpp/features/cpp11/templates/variadic_*
+
+S
+std::exchange :
+        ./cpp/std/exchange.cpp
+
+

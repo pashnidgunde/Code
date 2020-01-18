@@ -1,0 +1,37 @@
+
+
+std::function -->std::bad_func_call
+CopyConstructible
+CopyAssignable
+std::bind
+
+std::regex
+std::enable_if
+std::accumulate
+std::array
+std::any_of
+variadic_templates
+sizeof...
+constexpr
+return type deduction
+no raw loops
+function objects ( callable objects)
+lambdas (unnamed functions)
+structured bindings
+concepts
+
+-------------------------------------------------------------------------------------
+To do:
+
+Create meetup group for C++ community
+Boost state machine
+Boost Asio / timers / handlers
+Abseil
+
+
+
+-------------------------------------------------------------------------------------
+full specialization of functions
+template specialization : full specialization
+template specialization : partial specialization
+
