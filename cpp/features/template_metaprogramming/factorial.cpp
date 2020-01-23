@@ -9,12 +9,16 @@ long factorial(long number) {
 }
 
 template <unsigned int number> struct Factorial {
-  static constexpr long value = number * Factorial<number - 1>::value;
+  enum { value = number * Factorial<number - 1>::value };
 };
 
-template <> struct Factorial<1> { static constexpr long value = 1; };
+template <> struct Factorial<1> {
+  enum { value = 1 };
+};
 
-template <> struct Factorial<0> { static constexpr long value = 0; };
+template <> struct Factorial<0> {
+  enum { value = 0 };
+};
 
 int main() {
   std::cout << factorial(0) << std::endl;

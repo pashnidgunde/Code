@@ -5,10 +5,12 @@ long to_decimal(long binary) {
 }
 
 template <unsigned long binary> struct Decimal {
-  static constexpr long value = 2 * Decimal<binary / 10>::value + binary % 10;
+  enum { value = 2 * Decimal<binary / 10>::value + binary % 10 };
 };
 
-template <> struct Decimal<0> { static constexpr unsigned long value = 0; };
+template <> struct Decimal<0> {
+  enum { value = 0 };
+};
 
 int main() {
   std::cout << to_decimal(0) << std::endl;
