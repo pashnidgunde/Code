@@ -26,14 +26,14 @@ int main() {
 
   // Non copyable stateful lambdas
   // not mutiple catpures
-  auto non_copyable = [ y = 0, ptr = std::make_unique<int>(10) ]() {
+  auto non_copyable = [y = 0, ptr = std::make_unique<int>(10)]() {
     std::cout << "Y : " << y << " and , *ptr =" << *ptr << std::endl;
   };
   // auto copy = non_coyable;--> compilation error
 
   // stateful lambda that calculates fibonacci sequence
 
-  auto fibonacci_per_call = [ first = 0, second = 1 ]() mutable->int {
+  auto fibonacci_per_call = [first = 0, second = 1]() mutable -> int {
     // traditional approach
     // auto temp = first + second;
     // first = second;
@@ -52,5 +52,10 @@ int main() {
   std::cout << fibonacci_per_call() << std::endl;
   std::cout << fibonacci_per_call() << std::endl;
 
-  return 0;
+  // stateful lambda that prints hello world
+  [out = std::ref(std::cout << "Hello")]() {
+    out.get() << "World" << std::endl;
+  }();
+
+      return 0;
 }
