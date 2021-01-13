@@ -12,7 +12,7 @@ void print(Iter begin, Iter end)
     typename std::iterator_traits<Iter>::difference_type count = std::distance(begin,end);
     while (count > 0)
     {
-        typename std::__iterator_traits<Iter>::value_type value = *begin;
+        typename std::iterator_traits<Iter>::value_type value = *begin;
         std::cout << value;
         count --;
         begin++;

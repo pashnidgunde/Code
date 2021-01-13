@@ -18,7 +18,6 @@ X apply_fg(X x, UnaryOp1 f1, UnaryOp2 f2)
     return f1(f2(x));
 }
 
-
 int main()
 {
     std::cout << apply_fg(10.2,std::negate<float>(), square) << std::endl;
