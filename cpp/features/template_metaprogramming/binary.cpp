@@ -4,6 +4,9 @@ long to_decimal(long binary) {
   return (binary == 0) ? 0 : 2 * to_decimal(binary / 10) + binary % 10;
 }
 
+// to_decimal(10) = 2 * to_decimal(1) + 0
+// to_decimal(10) = 2 * 1 + 0;
+
 template <unsigned long binary> struct Decimal {
   static constexpr long value = 2 * Decimal<binary / 10>::value + binary % 10;
 };
