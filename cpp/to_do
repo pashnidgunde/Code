@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 vector<bool>
+=======
+>>>>>>> f1f26c138a7d1fd9e4d35a36f96895e8288336c9
 
 std::function -->std::bad_func_call
 CopyConstructible
@@ -19,6 +22,8 @@ function objects ( callable objects)
 lambdas (unnamed functions)
 structured bindings
 concepts
+socket programming
+
 
 -------------------------------------------------------------------------------------
 To do:
@@ -27,11 +32,3 @@ Create meetup group for C++ community
 Boost state machine
 Boost Asio / timers / handlers
 Abseil
-
-
-
--------------------------------------------------------------------------------------
-full specialization of functions
-template specialization : full specialization
-template specialization : partial specialization
-
