@@ -7,6 +7,12 @@ T sum(T first, Args... rest)            // function parameter pack
 {
   std::cout << __PRETTY_FUNCTION__ << "\n";
   return first + sum(rest...);
+  // for (1,2,3,4,5)
+  // return 1 + sum(2,3,4,5)
+  // return 1 + 2 + sum(3,4,5)
+  // return 1 + 2 + 3 + sum(4,5)
+  // return 1 + 2 + 3 + 4 + sum(5)
+  // return 1 + 2 + 3 + 4 + 5
 }
 
 int main() {

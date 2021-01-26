@@ -22,7 +22,7 @@ public:
     other.ptr = nullptr;
   }
 
-  MyVector(const size_t size) {
+  MyIntVector(const size_t size) {
     this->size = size;
     this->alloc(size)
   }

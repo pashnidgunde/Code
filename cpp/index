@@ -4,17 +4,26 @@ Features and Code
 L
 lambdas :
         ./cpp/features/lambda/*
+	
+M
+Metaprogramming :
+	./cpp/features/templates/metaprograms/*
+
+S
+SFINAE : 
+        ./cpp/features/templates/SFINAE.cpp
+std::exchange : 
+        ./cpp/std/exchange.cpp
 
 T
 templates :
-        ./cpp/features/cpp11/templates/*
+        ./cpp/features/templates/*
+template metaprogramming :
+	./cpp/feature/templates/metaprograms/*
 
 V        
 Variadic templates :
-        ./cpp/features/cpp11/templates/variadic_*
+        ./cpp/features/templates/variadic_*
 
-S
-std::exchange :
-        ./cpp/std/exchange.cpp
 
 
