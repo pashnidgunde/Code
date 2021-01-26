@@ -26,12 +26,12 @@
                 "name": "C++ Launch (Windows)",
                 "type": "cppdbg",
                 "request": "launch",
-                "program": "${workspaceRoot}/a.out",
+                "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
                 "MIMode": "gdb",
-                "miDebuggerPath": "C:\\MinGw\\bin\\gdb.exe",
-                "stopAtEntry": false,
+                "miDebuggerPath": "C:\\Program Files\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\gdb.exe",
+                "stopAtEntry": true,
                 "cwd": "${workspaceRoot}",
-                "externalConsole": true,
+                "externalConsole": false,
                 "visualizerFile": "${workspaceRoot}/my.natvis",
                 "setupCommands": [
                     {
@@ -39,7 +39,7 @@
                         "text": "-enable-pretty-printing",
                         "ignoreFailures": true
                     }
-                ]
+                ],
             }
         }
     ]
