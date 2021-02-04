@@ -1,3 +1,13 @@
+algorithm to find a substring in another string
+make_integer_sequence
+priority_queue
+huffman's code
+Judy Array
+Trie -- prefix trees
+Radix tree
+
+
+
 vector<bool>
 std::function -->std::bad_func_call
 CopyConstructible

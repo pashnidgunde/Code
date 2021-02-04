@@ -81,6 +81,10 @@ namespace pn
             //static constexpr size_t value =  GCD<GCD<Num1,Num2>::value,Nums...>::value;
         };
 
+        // GCD<10,20,30> = GCD<GCD<10,20>::value,30>::value
+
+        //GCD<10,20,30> = GCD<GCD<10,20>::value,30>::value
+
     }
 
 }

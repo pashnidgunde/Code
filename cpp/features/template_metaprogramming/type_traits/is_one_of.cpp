@@ -37,3 +37,8 @@ int main()
                  is_one_of<float, int, double,char,float>;
     return 0;
 }
+
+
+
+
+
