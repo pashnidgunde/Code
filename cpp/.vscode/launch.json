@@ -1,46 +1,19 @@
 {
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "C++ Launch",
-            "type": "cppdbg",
+            "name": "(Windows) Launch",
+            "type": "cppvsdbg",
             "request": "launch",
+            "program": "${workspaceFolder}/build/build.exe",
             "args": [],
-            "cwd": "${workspaceRoot}",
-            //"program": "${workspaceRoot}/a.out",
-            "program": "${workspaceRoot}/data_structures/priority_queue/a.out",
-            "linux": {
-                "MIMode": "gdb",
-                "setupCommands": [
-                    {
-                        "description": "Enable pretty-printing for gdb",
-                        "text": "-enable-pretty-printing",
-                        "ignoreFailures": true
-                    }
-                ]
-            },
-            "osx": {
-                "MIMode": "lldb"
-            },
-            "windows": {
-                "name": "C++ Launch (Windows)",
-                "type": "cppdbg",
-                "request": "launch",
-                "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
-                "MIMode": "gdb",
-                "miDebuggerPath": "C:\\Program Files\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\gdb.exe",
-                "stopAtEntry": true,
-                "cwd": "${workspaceRoot}",
-                "externalConsole": false,
-                "visualizerFile": "${workspaceRoot}/my.natvis",
-                "setupCommands": [
-                    {
-                        "description": "Enable pretty-printing for gdb",
-                        "text": "-enable-pretty-printing",
-                        "ignoreFailures": true
-                    }
-                ],
-            }
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "console": "externalTerminal"
         }
     ]
 }

@@ -1,6 +1,7 @@
 *.out
 *.o
 *.swp
+*.exe
 
 *.metadata/
 *RemoteSystemsTempFiles
@@ -10,3 +11,4 @@
 *.settings
 
 *.vscode/
+build
