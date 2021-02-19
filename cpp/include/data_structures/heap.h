@@ -107,27 +107,5 @@ namespace pn
         using MinHeap = struct heap<T,std::less<int>>;
     }
 }
+
 #endif
-
-int main()
-{
-    pn::ds::MaxHeap<int> max_heap;
-    
-    max_heap.insert(29);
-    //ASSERT_THAT(max_heap.get(), ::testing::ElementsAre(29));
-
-    max_heap.insert(37);
-    //ASSERT_THAT(max_heap.get(), ::testing::ElementsAre(37, 29));
-    
-    max_heap.insert(18);
-    //ASSERT_THAT(max_heap.get(), ::testing::ElementsAre(37, 29, 18));
-    
-    max_heap.insert(46);
-    //ASSERT_THAT(max_heap.get(), ::testing::ElementsAre(46, 37, 18, 29, 1));
-    
-    max_heap.insert(1);
-    //ASSERT_THAT(max_heap.get(), ::testing::ElementsAre(46, 37, 18, 29, 1));
-
-    return 0;
-}
-
