@@ -19,7 +19,7 @@ auto func1() {
   return "hello";
 }
 
-static_assert(std::is_same<const std::string, decltype(func1())>::value,
+static_assert(std::is_same<const char*, decltype(func1())>::value,
               "Types are not same");
 
 template <typename T>
@@ -48,7 +48,7 @@ class SomeWrapper {
   auto getComplexReturnType_cpp14(T1 a, T2 b, T3 c) {
     return a * b * c;
   };
-}
+};
 }  // namespace return_type_deduction_by_auto
 
 int main() {

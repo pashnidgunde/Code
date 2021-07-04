@@ -14,6 +14,9 @@
 #include <utility>
 #include <bitset>
 
+#include "gtest/gtest.h"
+#include "gmock/gmock.h"
+
 // ON(N * N)
 template<typename Iter>
 auto intersection(Iter begin1, Iter end1, Iter begin2, Iter end2)
@@ -98,7 +101,7 @@ size_t getMaxIntersectionForNDays(EmployeeScheule& employeeSchedule, size_t N)
     return (max_intersection_for_all_days.find(N) == max_intersection_for_all_days.end()) ? 0 : max_intersection_for_all_days[N].size();
 }
 
-int main()
+TEST(Intersection, testIntersection)
 {
     EmployeeScheule employeeSchedule {
         {2,3,5,6,8,9},
@@ -107,13 +110,10 @@ int main()
      };
     std::set<std::set<int>> result;
     
-    assert(getMaxIntersectionForNDays(employeeSchedule,3) == 2);
-    assert(getMaxIntersectionForNDays(employeeSchedule,2) == 0);
-    assert(getMaxIntersectionForNDays(employeeSchedule,6) == 1);
+    ASSERT_EQ(getMaxIntersectionForNDays(employeeSchedule,3) , 2);
+    ASSERT_EQ(getMaxIntersectionForNDays(employeeSchedule,2) , 0);
+    ASSERT_EQ(getMaxIntersectionForNDays(employeeSchedule,6) , 1);
 
-    assert(bitset_intersection_count(employeeSchedule[0].begin(),employeeSchedule[0].end(),employeeSchedule[1].begin(),employeeSchedule[1].end()) == 3);
-
-    return 0;
-    
+    ASSERT_EQ(bitset_intersection_count(employeeSchedule[0].begin(),employeeSchedule[0].end(),employeeSchedule[1].begin(),employeeSchedule[1].end()) , 3);
 }
 
