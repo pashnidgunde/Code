@@ -3,7 +3,7 @@ project(build VERSION 0.1.0)
 set(CMAKE_CXX_STANDARD 14)
 
 # Download and unpack googletest at configure time
-configure_file(unit_tests/CMakeLists.txt.in googletest-download/CMakeLists.txt)
+configure_file(CMakeLists.txt.in googletest-download/CMakeLists.txt)
 execute_process(COMMAND "${CMAKE_COMMAND}" -G "${CMAKE_GENERATOR}" .
     WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/googletest-download"
 )
@@ -30,7 +30,10 @@ if(CMAKE_VERSION VERSION_LESS 2.8.11)
     )
 endif()
 
-include_directories( include build/googletest-src/googletest/include build/googletest-src/googlemock/include)
+include_directories( include 
+                     build/googletest-src/googletest/include 
+                     build/googletest-src/googlemock/include)
 add_subdirectory(unit_tests)
+add_subdirectory(puzzles)
 # add_executable(build main.cpp)
 

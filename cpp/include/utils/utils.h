@@ -1,7 +1,7 @@
 #ifndef PN_UTILS_UTILS_HPP
 #define PN_UTILS_UTILS_HPP
 
-#include <algortihm>
+#include <algorithm>
 #include <random>
 
 namespace pn
