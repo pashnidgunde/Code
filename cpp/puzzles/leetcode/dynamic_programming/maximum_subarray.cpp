@@ -1,4 +1,8 @@
-//https://leetcode.com/problems/longest-palindromic-substring/
+//https://leetcode.com/problems/maximum-subarray/
+
+// DIVIDE_AND_CONQUER
+// DYNAMIC_PROGRAMMING
+// KADENS
 
 #include <iostream>
 #include <cassert>
