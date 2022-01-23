@@ -35,7 +35,6 @@ socket programming
 -------------------------------------------------------------------------------------
 To do:
 
-Create meetup group for C++ community
 Boost state machine
 Boost Asio / timers / handlers
 Abseil
