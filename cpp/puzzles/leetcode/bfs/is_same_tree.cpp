@@ -1,10 +1,12 @@
 //https://leetcode.com/problems/same-tree/
 // Find if two trees are same
 
+// BINARY_TREE
+// BFS
+
 #include <iostream>
 #include <cassert>
 
-//
 //Definition for a binary tree node.
  struct TreeNode {
       int val;
@@ -23,7 +25,6 @@ public:
         return isSameTree(p->left,q->left) && isSameTree(p->right,q->right);
     }
 };
-
 
 int main()
 {
