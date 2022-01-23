@@ -1,10 +1,8 @@
-<<<<<<< HEAD
 #include <iostream>
 #include <cassert>
 #include <cmath>
 
-// REVERSE
-// PALINDROME
+
 
 class Solution {
 public:
@@ -42,11 +40,14 @@ public:
     {
         int reverse_x = 0;
         int x_copy = x;
+        int mul = 1;
         while(x_copy > 0)
         {
-            reverse_x = reverse_x * 10 + x_copy % 10;
+            reverse_x = reverse_x * mul + x_copy % 10;
+            mul = mul * 10;
             x_copy = x_copy / 10;
         }
+
         return x == reverse_x;
     }
 };
@@ -59,18 +60,6 @@ int main()
     assert(!s.isPalindrome(10));
     assert(s.isPalindrome(9999));
     assert(s.isPalindrome(99599));
-    assert(!s.isPalindrome(123));
     return true;
 }
 
-=======
-#include <vector>
-
-int main() {
-
-  std::vector<int> v{1, 2, 3, 4};
-  std::vector<int> v_cp(v);
-
-  return 0;
-};
->>>>>>> eef16485dfd8d69cf6aee0c5037d38c2874c99f8
