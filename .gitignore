@@ -11,4 +11,9 @@
 *.settings
 
 *.vscode/
+
 build
+
+git_projects
+third_party
+
