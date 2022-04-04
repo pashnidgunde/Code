@@ -1,5 +1,6 @@
 #include "OrderCache.h"
 #include <algorithm>
+#include <iostream>
 
 // add order to the cache
 void OrderCache::addOrder(Order order)
@@ -79,32 +80,40 @@ unsigned int OrderCache::getMatchingSizeForSecurity(const std::string& securityI
     Qty total_match_qty = 0;
     Qty matching_qty = 0;
 
-    auto can_match = [&](const auto& buy, const auto& sell)  { return buy.company() != sell.company(); };
+    auto can_match = [&](const auto& buy, const auto& sell)  { 
+        std::cout << buy.company () << " : " << sell.company() << std::endl;
+        return buy.company() != sell.company(); 
+    };
 
     auto& buy_order_indexes = m_orders_by_security_id[securityId].first;
     auto& sell_order_indexes = m_orders_by_security_id[securityId].second;
 
-    auto buy_index_iter = buy_order_indexes.begin();
-    auto sell_index_iter = sell_order_indexes.begin();
-
-    while (buy_index_iter != buy_order_indexes.end() && sell_index_iter != sell_order_indexes.end())
+    for (const auto& buy_order_index : buy_order_indexes)
     {
-        auto& buy_order = m_all_orders[*buy_index_iter];
-        auto& sell_order = m_all_orders[*sell_index_iter];
-        
-        if (can_match(buy_order,sell_order))
+        auto& buy_order = m_all_orders[buy_order_index];
+        std::cout << "Buy order id : " << buy_order.orderId() << std::endl;
+        for (const auto& sell_order_index : sell_order_indexes)
         {
-            matching_qty = std::min(buy_order.qty(), sell_order.qty());
-            total_match_qty+= matching_qty;
-            buy_order.reduce_qty(matching_qty);
-            sell_order.reduce_qty(matching_qty);
+            auto& sell_order = m_all_orders[sell_order_index];
+            if (sell_order.fully_matched()) continue;
 
-            if (buy_order.fully_matched()) buy_index_iter++;
-            if (sell_order.fully_matched()) sell_index_iter++;
-        }
-        else
-        {
-            sell_index_iter++;
+            std::cout << "Sell order id : " << sell_order.orderId() << std::endl;
+            
+            matching_qty = std::min(buy_order.qty(), sell_order.qty());
+            std::cout << "buy qty : " << buy_order.qty() << " , sell_order_qty : " <<  sell_order.qty() << std::endl;
+            
+            if (can_match(buy_order,sell_order) && matching_qty > 0)
+            {
+                std::cout << "matching _qty " << matching_qty << std::endl;
+
+                total_match_qty+= matching_qty;
+                
+                std::cout << "total matching_qty " << total_match_qty << std::endl;
+                buy_order.reduce_qty(matching_qty);
+                sell_order.reduce_qty(matching_qty);
+
+                if (buy_order.fully_matched()) break;
+            }
         }
     }
 
@@ -129,7 +138,7 @@ unsigned int OrderCache::getMatchingSizeForSecurity(const std::string& securityI
 
     soft_delete(m_orders_by_security_id[securityId].first);
     soft_delete(m_orders_by_security_id[securityId].second);
-    return matching_qty;
+    return total_match_qty;
 }
 
 // Monish mentioned only open orders 
