@@ -5,6 +5,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <algorithm>
+#include <string_view>  
 
 class Order
 {
@@ -84,7 +85,8 @@ class OrderCache : public OrderCacheInterface
         OrderCache() = default;
 
         // Reserve with initial capacity to avoid unnecessary resizes
-        OrderCache(size_t starting_capacity)
+        OrderCache(size_t starting_capacity) : 
+            m_initial_capacity(starting_capacity)
         {
             m_all_orders.reserve(starting_capacity);
         }
@@ -104,6 +106,8 @@ class OrderCache : public OrderCacheInterface
             auto &buy_or_sell_orders = (order.side()[0] == 'B') ?
                 m_orders_by_security_id[new_order.securityId()].first :
                 m_orders_by_security_id[new_order.securityId()].second;
+
+            buy_or_sell_orders.insert(index);
         }
 
         // remove order with this unique order id from the cache
@@ -167,32 +171,35 @@ class OrderCache : public OrderCacheInterface
             Qty total_match_qty = 0;
             Qty matching_qty = 0;
 
-            auto can_match = [&](const auto& buy, const auto& sell)  { return buy.company() != sell.company(); };
+            auto can_match = [&](const auto& buy, const auto& sell)  { 
+                return buy.company() != sell.company(); 
+            };
 
             auto& buy_order_indexes = m_orders_by_security_id[securityId].first;
             auto& sell_order_indexes = m_orders_by_security_id[securityId].second;
 
-            auto buy_index_iter = buy_order_indexes.begin();
-            auto sell_index_iter = sell_order_indexes.begin();
-
-            while (buy_index_iter != buy_order_indexes.end() && sell_index_iter != sell_order_indexes.end())
+            for (const auto& buy_order_index : buy_order_indexes)
             {
-                auto& buy_order = m_all_orders[*buy_index_iter];
-                auto& sell_order = m_all_orders[*sell_index_iter];
-                
-                if (can_match(buy_order,sell_order))
+                auto& buy_order = m_all_orders[buy_order_index];
+                for (const auto& sell_order_index : sell_order_indexes)
                 {
-                    matching_qty = std::min(buy_order.qty(), sell_order.qty());
-                    total_match_qty+= matching_qty;
-                    buy_order.reduce_qty(matching_qty);
-                    sell_order.reduce_qty(matching_qty);
+                    auto& sell_order = m_all_orders[sell_order_index];
 
-                    if (buy_order.fully_matched()) buy_index_iter++;
-                    if (sell_order.fully_matched()) sell_index_iter++;
-                }
-                else
-                {
-                    sell_index_iter++;
+                    // short circuit
+                    if (sell_order.fully_matched()) continue;
+    
+                    matching_qty = std::min(buy_order.qty(), sell_order.qty());
+                    
+                    if (can_match(buy_order,sell_order) && matching_qty > 0)
+                    {
+                        total_match_qty+= matching_qty;
+                        
+                        buy_order.reduce_qty(matching_qty);
+                        sell_order.reduce_qty(matching_qty);
+
+                        // short circuit
+                        if (buy_order.fully_matched()) break;
+                    }
                 }
             }
 
@@ -217,7 +224,7 @@ class OrderCache : public OrderCacheInterface
 
             soft_delete(m_orders_by_security_id[securityId].first);
             soft_delete(m_orders_by_security_id[securityId].second);
-            return matching_qty;
+            return total_match_qty;
         }
 
         // Monish mentioned only open orders 
@@ -234,10 +241,20 @@ class OrderCache : public OrderCacheInterface
         }
 
     private:
-        using OrderId = std::string_view;
-        using User = std::string_view;
-        using Company = std::string_view;
-        using SecurityId = std::string_view;
+        // string_view as key not tested on all platforms
+        // Works on 64 bit RH7, not on win32 , apply as per platform
+        #ifdef _STRING_VIEW_SUPPORTED
+            using OrderId = std::string_view;
+            using User = std::string_view;
+            using Company = std::string_view;
+            using SecurityId = std::string_view;
+        #else
+            using OrderId = std::string;
+            using User = std::string;
+            using Company = std::string;
+            using SecurityId = std::string;
+        #endif
+        
         using Qty = unsigned int;
         using BuyQty = Qty;
         using SellQty = Qty;
@@ -261,16 +278,33 @@ class OrderCache : public OrderCacheInterface
         using OrderIndexesBySecurityId = std::unordered_map<SecurityId,BuySellOrderIndexes>;
 
         // default  of OrderBook
-        size_t m_starting_capacity = 0;
+        size_t m_initial_capacity = 0;
         Orders m_all_orders;
         OrderIndexesByOrderId m_orders_by_order_id;
         OrderIndexesByUser m_orders_by_user;
         OrderIndexesBySecurityId m_orders_by_security_id;
 
-        // API's for testing purpose
+        // API's for testing only
     public:
-        int capacity() { return m_starting_capacity; }
+        int capacity() { return m_initial_capacity; }
         int orderCount() { return m_all_orders.size();}
         int openOrderCount() { return getAllOrders().size(); }
+        const Order& getOrderByOrderId(const OrderId& order_id) const
+        {
+            return m_all_orders[m_orders_by_order_id.at(order_id)];
+        }
+        const OrderIndexes& getOrdersByUser(const User& user_id) const
+        {
+            return m_orders_by_user.at(user_id);
+        }
+        const BuySellOrderIndexes& getOrdersBySecurityId(const SecurityId& security_id) const
+        {
+            return m_orders_by_security_id.at(security_id);
+        }
+        
+        bool isOrderOpen(const OrderId& order_id) const {
+            return (m_orders_by_order_id.find(order_id) != m_orders_by_order_id.end());
+        }
+
 };
 
