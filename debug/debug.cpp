@@ -146,7 +146,7 @@ int main()
         assert(1 == t.process_line("I1,I6"));
         assert(2 == t.process_line("I1,I4"));
         assert(6 == t.process_line("I1,I2,I3,I4,I5,I6"));
-        std::cout << t.process_line("I1,I2,I3,I4,I5,I6,I1");
+        assert(6 == t.process_line("I1,I2,I3,I4,I5,I6,I1"));
     }
 
     // Q
@@ -157,9 +157,17 @@ int main()
         assert(4 == t.process_line("Q1,Q0"));
         assert(10 == t.process_line("Q1,Q2,Q3,Q4,Q5"));
         assert(10 == t.process_line("Q1,Q2,Q3,Q4,Q5,Q0"));
-        std::cout << t.process_line("Q0,Q2,Q4,Q6,Q8");
-        //assert(0 == t.process_line("Q0,Q2,Q4,Q6,Q8"));
+        assert(0 == t.process_line("Q0,Q2,Q4,Q6,Q8"));
     }
+
+    // Q and I
+    {
+        Tetris t;
+        assert(1 == t.process_line("I0,I4,Q8"));
+        assert(0 == t.process_line("I0,I4,I0,I4,Q8"));
+    }
+
+    
 
 }
 
