@@ -6,113 +6,186 @@
 #include <cassert>
 #include <functional>
 #include <cstdint>
+#include <bitset>
 
 struct Tetris
 {
-    int MAX_WIDTH = 10;
-    int MAX_HEIGHT = 100;
-    std::vector<int> count_at_height = std::vector<int>(MAX_WIDTH,0);
-    std::vector<int> height_at_column = std::vector<int>(MAX_HEIGHT,0);
-    int max_height = 0;
-    std::unordered_map<char,std::function<int(int)>> shape_to_action {
-            {'I', std::bind(&Tetris::on_i, this, std::placeholders::_1)},
-            {'Q', std::bind(&Tetris::on_q, this, std::placeholders::_1)},
-            {'Z', std::bind(&Tetris::on_i, this, std::placeholders::_1)},
-            {'S', std::bind(&Tetris::on_i, this, std::placeholders::_1)},
-            {'T', std::bind(&Tetris::on_i, this, std::placeholders::_1)},
-            {'L', std::bind(&Tetris::on_i, this, std::placeholders::_1)},
-            {'J', std::bind(&Tetris::on_i, this, std::placeholders::_1)}};
-
+    uint8_t MAX_WIDTH = 10;
+    uint8_t MAX_HEIGHT = 100;
     
+    std::vector<std::bitset<10>> _grid = std::vector<std::bitset<10>>(10);
+    std::vector<uint8_t> height_at_column = std::vector<uint8_t>(MAX_HEIGHT,0);
+    uint8_t _max_height = 0;
+
+    std::unordered_map<char,std::function<uint8_t(uint8_t)>> shape_to_action {
+            {'I', std::bind(&Tetris::on_I, this, std::placeholders::_1)},
+            {'Q', std::bind(&Tetris::on_Q, this, std::placeholders::_1)},
+            // {'Z', std::bind(&Tetris::on_Z, this, std::placeholders::_1)},
+            // {'S', std::bind(&Tetris::on_S, this, std::placeholders::_1)},
+            // {'T', std::bind(&Tetris::on_T, this, std::placeholders::_1)},
+            // {'L', std::bind(&Tetris::on_I, this, std::placeholders::_1)},
+            {'J', std::bind(&Tetris::on_I, this, std::placeholders::_1)}};
+
     void reset()
     {
-        count_at_height = std::vector<int>(MAX_WIDTH,0);
-        height_at_column = std::vector<int>(MAX_HEIGHT,0);
-        max_height = 0;
-        
+        height_at_column = std::vector<uint8_t>(MAX_HEIGHT,0);
+        for(auto& e : _grid) { e.reset(); }
+        _max_height = 0;
     }
 
     void print()
     {
-        for(int j= 0; j < MAX_WIDTH; j++ )
+        for(uint8_t j= 0; j <= MAX_WIDTH; j++ )
         {
-            std::cout << height_at_column[j] << ",";
+            std::cout << int(height_at_column[j]) << ",";
         }
         std::cout << std::endl;
+        for(uint8_t j= _max_height; j > 0; j-- )
+        {
+            auto s = _grid[j].to_string();
+            std::reverse(s.begin(), s.end());
+            //std::replace(s.begin(),s.end(),'1',(char)254u);
+            for (size_t i =0; i<s.size();i++)
+            {
+                std::cout << ((s[i] == '1') ? "\u25A0" : "\u25A1");
+            }
+            std::cout << std::endl;
+        }
     }
 
-    int on_i(int column)
+
+    void adjust_height()
+    {
+        // if (width_at_height[current_height] == MAX_WIDTH)
+        // {
+        //     print();
+        //     std::for_each(height_at_column.begin(), height_at_column.end(), [&](uint8_t& n){ n--; });
+        //     width_at_height[current_height] = 0;
+        //     new_height--;
+        //     max_height--;
+        // }
+    }
+
+    void set_bits(uint8_t height, uint8_t column, uint8_t width)
+    {
+        std::bitset<10> &bs = _grid[height];
+        for (uint8_t i=column; i< (column + width); i++)
+        {
+            bs.set(i);
+        }
+    }
+
+    uint8_t on_I(uint8_t column)
     {
         auto begin = height_at_column.begin() + column;
         auto end = begin + 4;
-        int current_height = *(std::max_element(begin, end));
-        std::for_each(begin, end, [&](int& n){ n = current_height + 1; });
-
-        count_at_height[current_height]+=4;
-        int new_height = current_height + 1;
-        if (count_at_height[current_height] == MAX_WIDTH)
-        {
-            std::for_each(height_at_column.begin(), height_at_column.end(), [&](int& n){ n--; });
-            count_at_height[current_height] = 0;
-            new_height--;
-            max_height--;
-        }
-
-        print();
-        return new_height;
+        uint8_t nh = *(std::max_element(begin, end)) + 1;
+        std::for_each(begin, end, [&](uint8_t& n){ n = std::max(n, nh); });
+        set_bits(nh,column,4);
+        return *(std::max_element(begin, end));
     };
 
-    int on_q(int column)
+    uint8_t on_Q(uint8_t column)
     {
         auto begin = height_at_column.begin() + column;
         auto end = begin + 2;
-        int current_height = *(std::max_element(begin, end));
-        count_at_height[current_height]+=2;
-        count_at_height[current_height+1]+=2;
-        std::for_each(begin, end, [&](int& n){ n = current_height + 2; });
-        int new_height = current_height + 2;   
-        if (count_at_height[current_height] == MAX_WIDTH) 
-        {
-            print();
-            std::for_each(height_at_column.begin(), height_at_column.end(), [&](int& n){ n--; });
-            count_at_height[current_height] = 0;
-            new_height--;
-            max_height--;
-        }
-        if (count_at_height[current_height+1] == MAX_WIDTH) 
-        {
-            print();
-            std::for_each(height_at_column.begin(), height_at_column.end(), [&](int& n){ n--; });
-            count_at_height[current_height+1] = 0;
-            new_height--;
-            max_height--;
-        }
-        print();
-        return new_height;
+        uint8_t nh = *(std::max_element(begin, end)) + 2;
+        std::for_each(begin, end, [&](uint8_t& n){ n = std::max(n, nh); });
+        set_bits(nh,column,2);
+        set_bits(nh-1,column,2);
+        return *(std::max_element(begin, end));
     };
 
+    // uint8_t on_Z(uint8_t column)
+    // {
+    //     uint8_t height_at_column = *(height_at_column.begin() + column);
+    //     auto width  = widhth
+    //     std::cout << *begin << std::endl;
+    //     std::cout << width_at_height[*begin];
+    //     // auto begin = height_at_column.begin() + column;
+    //     // auto mid = begin + 1;
+    //     // auto end = mid + 1;
 
-    int process_line(const std::string& line)
+       
+
+    //     // uint8_t max_height = *(std::max_element(begin, end));
+        
+    //     // if (max_height == *end)
+    //     // {
+    //     //     width_at_height[max_height+1]+=2; 
+    //     //     width_at_height[max_height+2]+=2; 
+
+    //     //     // adjust height
+    //     //     *end = std::max(*end, max_height + 1);
+    //     //     *mid = std::max(*mid, max_height + 2);
+    //     //     *begin = std::max(*begin, *mid);
+    //     // }
+    //     // else
+    //     // {
+    //     //     width_at_height[max_height]+=2; 
+    //     //     width_at_height[max_height+1]+=2; 
+
+    //     //     // adjust height
+    //     //     *end = std::max(*end, max_height);
+    //     //     *mid = std::max(*mid, max_height + 1);
+    //     //     *begin = std::max(*begin, *mid);
+    //     // }
+
+        
+        
+    //     print();
+    //     return 0;
+    // }
+
+    // uint8_t on_S(uint8_t column)
+    // {
+    //     auto begin = height_at_column.begin() + column;
+    //     auto mid = begin + 1;
+    //     auto end = mid + 1;
+    //     *mid = std::max((*mid) + 2, *mid);
+    //     *begin = std::max(*end, *mid - 1);
+    //     *end = std::max(*begin, *mid);
+            
+    //     print();
+    //     return  *end;
+    // }
+
+    // uint8_t on_T(uint8_t column)
+    // {
+    //     auto begin = height_at_column.begin() + column;
+    //     auto mid = begin + 1;
+    //     auto end = mid + 1;
+    //     *mid = std::max((*mid) + 2, *mid);
+    //     *begin = std::max(*end, *mid - 1);
+    //     *end = std::max(*begin, *mid);
+            
+    //     print();
+    //     return  *end;
+    // }
+
+
+    uint8_t process_line(const std::string& line)
     {
         reset();
         for (size_t i=0; i< line.length();)    
         {
             char shape = line[i];
-            int column = line[++i] - '0'; 
-            std::cout << shape << column << " : ";
-            max_height = std::max(max_height,shape_to_action[shape](column));
+            uint8_t column = line[++i] - '0'; 
+            std::cout << shape << int(column) << " : ";
+            _max_height = std::max(_max_height,shape_to_action[shape](column));
             i+=2;
+            print();
         }
         std::cout << " ----------------" << std::endl;
-        return max_height;
+        return _max_height;
     }
 
     // The interface uses vector because its easy to for unit testing
-    std::vector<int> process_lines(std::vector<std::string>& lines)
+    std::vector<uint8_t> process_lines(std::vector<std::string>& lines)
     {
-        if (lines.empty()) return std::vector<int>{};
+        if (lines.empty()) return std::vector<uint8_t>{};
     
-        std::vector<int>result;
+        std::vector<uint8_t>result;
         for (const auto& line : lines)
         {
             result.push_back(process_line(line));
@@ -126,14 +199,14 @@ struct Tetris
 
 int main()
 {
-    // Unit tests
+    // // Unit tests
     // Reset
     {
         Tetris t;
         t.reset();
-        assert(t.max_height == 0);
-        std::for_each(t.count_at_height.begin(), t.count_at_height.end(), [](int &n){ assert(n == 0); });
-        std::for_each(t.height_at_column.begin(), t.height_at_column.end(), [](int &n){ assert(n == 0); }); 
+        assert(t._max_height == 0);
+        std::for_each(t._grid.begin(), t._grid.end(), [](const auto &n){ assert(n.none()); });
+        std::for_each(t.height_at_column.begin(), t.height_at_column.end(), [](uint8_t &n){ assert(n == 0); }); 
     }
 
     // I
@@ -157,22 +230,53 @@ int main()
         assert(4 == t.process_line("Q1,Q0"));
         assert(10 == t.process_line("Q1,Q2,Q3,Q4,Q5"));
         assert(10 == t.process_line("Q1,Q2,Q3,Q4,Q5,Q0"));
-        assert(0 == t.process_line("Q0,Q2,Q4,Q6,Q8"));
     }
 
-    // Q and I
-    {
-        Tetris t;
-        assert(1 == t.process_line("I0,I4,Q8"));
-        assert(0 == t.process_line("I0,I4,I0,I4,Q8"));
-    }
+    // // Z
+    // {
+    //     Tetris t;
+    //     assert(2 == t.process_line("Z0"));
+    //     assert(2 == t.process_line("Z0,Z4"));
+    //     assert(4 == t.process_line("Z1,Z0"));
+    //     assert(6 == t.process_line("Z1,Z2,Z3,Z4,Z5"));
+    //     assert(6 == t.process_line("Z1,Z2,Z3,Z4,Z5,Z0"));
+    //     assert(4 == t.process_line("I1,I2,Z4"));
+    //     assert(4 == t.process_line("I1,I2,Z3"));
+    // }
+
+    // // // S
+    // // {
+    // //     Tetris t;
+    // //     assert(2 == t.process_line("S0"));
+    // //     assert(2 == t.process_line("S0,S4"));
+    // //     assert(3 == t.process_line("S1,S0"));
+    // //     assert(10 == t.process_line("S1,S2,S3,S4,S5"));
+    // //     assert(10 == t.process_line("S1,S2,S3,S4,S5,S0"));
+    // // }
+
+    // // Combinations
+    // {
+    //     // Tetris t;
+    //     // assert(1 == t.process_line("I0,I4,Q8"));
+        
+
+    // }
+
+    // // Reductions
+    // {
+    //     // assert(0 == t.process_line("I0,I4,I0,I4,Q8"));
+    //     // assert(0 == t.process_line("Q0,Q2,Q4,Q6,Q8"));
+    //     // //t.assert(1 == t.process_line("Z0,Z3,Z5,Z8"));
+    // }
+
+    
 
     
 
 }
 
 /*
-int main(int argc, char *argv[])
+uint8_t main(uint8_t argc, char *argv[])
 {
     if (argc != 2)
     {
