@@ -20,7 +20,7 @@ struct Tetris
     std::unordered_map<char,std::function<uint8_t(uint8_t)>> shape_to_action {
             {'I', std::bind(&Tetris::on_I, this, std::placeholders::_1)},
             {'Q', std::bind(&Tetris::on_Q, this, std::placeholders::_1)},
-            // {'Z', std::bind(&Tetris::on_Z, this, std::placeholders::_1)},
+            {'Z', std::bind(&Tetris::on_Z, this, std::placeholders::_1)},
             // {'S', std::bind(&Tetris::on_S, this, std::placeholders::_1)},
             // {'T', std::bind(&Tetris::on_T, this, std::placeholders::_1)},
             // {'L', std::bind(&Tetris::on_I, this, std::placeholders::_1)},
@@ -43,6 +43,7 @@ struct Tetris
         for(uint8_t j= _max_height; j > 0; j-- )
         {
             auto s = _grid[j].to_string();
+            std::cout << int(j) << " : ";
             std::reverse(s.begin(), s.end());
             //std::replace(s.begin(),s.end(),'1',(char)254u);
             for (size_t i =0; i<s.size();i++)
@@ -96,46 +97,52 @@ struct Tetris
         return *(std::max_element(begin, end));
     };
 
-    // uint8_t on_Z(uint8_t column)
-    // {
-    //     uint8_t height_at_column = *(height_at_column.begin() + column);
-    //     auto width  = widhth
-    //     std::cout << *begin << std::endl;
-    //     std::cout << width_at_height[*begin];
-    //     // auto begin = height_at_column.begin() + column;
-    //     // auto mid = begin + 1;
-    //     // auto end = mid + 1;
+    uint8_t on_Z(uint8_t column)
+    {
+        auto begin = height_at_column.begin() + column;
+        auto mid = begin + 1;
+        auto end = mid + 1;
+        uint8_t current_height = *(std::max_element(begin, end+1));
+        //std::cout << "PN :" << int(current_height) << std::endl;
+        if (*end == current_height)
+        {
+            *begin = std::max(*begin,uint8_t(current_height+2));
+            *mid = std::max(*mid, uint8_t(current_height+2));
+            *end = std::max(*end, uint8_t(current_height+1));
 
-       
-
-    //     // uint8_t max_height = *(std::max_element(begin, end));
+            set_bits(current_height+2,column,1);
+            set_bits(current_height+2,column+1,1);
+            set_bits(current_height+1,column+1,1);
+            set_bits(current_height+1,column+2,1);
         
-    //     // if (max_height == *end)
-    //     // {
-    //     //     width_at_height[max_height+1]+=2; 
-    //     //     width_at_height[max_height+2]+=2; 
+            return current_height+2;
+        }
 
-    //     //     // adjust height
-    //     //     *end = std::max(*end, max_height + 1);
-    //     //     *mid = std::max(*mid, max_height + 2);
-    //     //     *begin = std::max(*begin, *mid);
-    //     // }
-    //     // else
-    //     // {
-    //     //     width_at_height[max_height]+=2; 
-    //     //     width_at_height[max_height+1]+=2; 
+        if (*mid == current_height)
+        {
+            *begin = std::max(*begin,uint8_t(current_height+2));
+            *end = std::max(*end, uint8_t(current_height+1));
+            *mid = std::max(*mid, uint8_t(current_height+2));
+            
+            set_bits(current_height+2,column,1);
+            set_bits(current_height+2,column+1,1);
+            set_bits(current_height+1,column+1,1);
+            set_bits(current_height+1,column+2,1);
+            return current_height + 2;
+        }
 
-    //     //     // adjust height
-    //     //     *end = std::max(*end, max_height);
-    //     //     *mid = std::max(*mid, max_height + 1);
-    //     //     *begin = std::max(*begin, *mid);
-    //     // }
+        // max at begin
+        *begin = std::max(*begin,uint8_t(current_height+1));
+        *mid = std::max(*mid, uint8_t(current_height+1));
+        *end = std::max(*end, current_height);
 
+        set_bits(current_height+1,column+1,1);
+        set_bits(current_height+1,column,1);
+        set_bits(current_height,column+1,1);
+        set_bits(current_height,column+2,1);                       
         
-        
-    //     print();
-    //     return 0;
-    // }
+        return current_height + 1;
+    }
 
     // uint8_t on_S(uint8_t column)
     // {
@@ -229,20 +236,20 @@ int main()
         assert(2 == t.process_line("Q0,Q4"));
         assert(4 == t.process_line("Q1,Q0"));
         assert(10 == t.process_line("Q1,Q2,Q3,Q4,Q5"));
+        assert(10 == t.process_line("Q1,Q2,Q3,Q4,Q5"));
         assert(10 == t.process_line("Q1,Q2,Q3,Q4,Q5,Q0"));
     }
 
-    // // Z
-    // {
-    //     Tetris t;
-    //     assert(2 == t.process_line("Z0"));
-    //     assert(2 == t.process_line("Z0,Z4"));
-    //     assert(4 == t.process_line("Z1,Z0"));
-    //     assert(6 == t.process_line("Z1,Z2,Z3,Z4,Z5"));
-    //     assert(6 == t.process_line("Z1,Z2,Z3,Z4,Z5,Z0"));
-    //     assert(4 == t.process_line("I1,I2,Z4"));
-    //     assert(4 == t.process_line("I1,I2,Z3"));
-    // }
+    // Z
+    {
+        Tetris t;
+        assert(2 == t.process_line("Z0"));
+        assert(2 == t.process_line("Z0,Z4"));
+        assert(4 == t.process_line("Z1,Z0"));
+        assert(6 == t.process_line("Z1,Z2,Z3,Z4,Z5"));
+        assert(6 == t.process_line("Z1,Z2,Z3,Z4,Z5,Z0"));
+
+    }
 
     // // // S
     // // {
@@ -256,11 +263,14 @@ int main()
 
     // // Combinations
     // {
-    //     // Tetris t;
-    //     // assert(1 == t.process_line("I0,I4,Q8"));
-        
+    //      // Tetris t;
+    // //     // assert(1 == t.process_line("I0,I4,Q8"));
+    //         assert(6 == t.process_line("I1,I2,Z0"));
+    //                 assert(4 == t.process_line("I1,I2,Z4"));
+    //         assert(4 == t.process_line("I1,I2,Z3"));
+            
 
-    // }
+    // // }
 
     // // Reductions
     // {
