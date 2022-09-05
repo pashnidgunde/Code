@@ -58,20 +58,22 @@ struct Tetris
 
     void adjust_height()
     {
-        uint8_t count = 0;
-        uint8_t reduced_count = 0;
-        while(count <= 3 && _max_height - count >= 1)
+        std::cout << "MAX SO FAR : " << int(_max_height) << std::endl;
+        
+        // TO DO : To optimize based on actual height difference
+        uint8_t range = std::min(uint8_t(3),_max_height);
+        for (int i =range ; i > 0; i--)
         {
-            if (width_at_height[_max_height - count] == MAX_WIDTH)
+            std::cout << "width at : " << int(range) << " : " << int(width_at_height[range]) << std::endl;
+            if (width_at_height[range - i] == MAX_WIDTH)
             {
-                width_at_height[_max_height-count] = 0;
-                _grid[_max_height-count].reset();
-                std::for_each(height_at_column.begin(), height_at_column.end(), [&](uint8_t& n){ n--; });
-                reduced_count++;
+            //     width_at_height[_max_height - i] = 0;
+            //     std::for_each(height_at_column.begin(), height_at_column.end(), [&](uint8_t& n){ n--; });
+            //     // _grid[_max_height-1] =  _grid[new_possible_max];
+            //     // _grid[_max_height].reset();
+            //     _max_height--;
             }
-            count++;
         }
-        _max_height -= reduced_count;
     }
 
     void set_bits(uint8_t height, uint8_t column, uint8_t width)
@@ -280,7 +282,7 @@ struct Tetris
             char shape = line[i];
             uint8_t column = line[++i] - '0'; 
             std::cout << shape << int(column) << " : ";
-            _max_height = std::max(_max_height, shape_to_action[shape](column));
+            _max_height = std::max(_max_height,shape_to_action[shape](column));
             adjust_height();
             i+=2;
             print();
@@ -302,9 +304,6 @@ struct Tetris
         return result;
     }
 };
-
-
-
 
 int main()
 {
@@ -412,7 +411,6 @@ int main()
         assert(0 == t.process_line("I0,I4,I0,I4,Q8"));
         assert(0 == t.process_line("Q0,Q2,Q4,Q6,Q8"));
     }
-
 
     // Examples from exercise
     {
