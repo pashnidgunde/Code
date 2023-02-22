@@ -6,11 +6,9 @@
 #include <exception>
 #include <stdexcept>
 #include <memory>
-
-
+#include <cmath>
 
 namespace order_book {
-
 
 enum class Side {kBid, kOffer};
 
@@ -28,98 +26,152 @@ struct PriceLevel {
     double price;
     double size;
     PriceLevel(double p, double s) : price(p), size(s) {}
+    bool operator == (const PriceLevel& rhs)
+    {
+        return std::fabs(this->price - rhs.price) <= std::numeric_limits<double>::epsilon();
+    }
+    
+    void operator += (const PriceLevel& rhs)
+    {
+        this->size+= rhs.size;
+    }
 
-};
+    friend bool operator > (const PriceLevel& lhs, const PriceLevel& rhs)
+    {
+        return lhs.price > rhs.price;
+    }
 
-struct Node
-{
-    PriceLevel l;
-    std::unique_ptr<Node> next;
-    std::unique_ptr<Node> prv;
-
-    Node(PriceLevel pl) :
-        l(std::move(pl))
-    {}
-        
+    friend bool operator < (const PriceLevel& lhs, const PriceLevel& rhs)
+    {
+        return lhs.price < rhs.price;
+    }
 };
 
 template<typename T>
+struct Node
+{
+    T data;
+    std::shared_ptr<Node> next;
+    std::shared_ptr<Node> prev;
+
+    Node(T elem) :
+        data(std::move(elem))
+    {
+
+    }
+};
+
+template<typename T, typename C, typename D>
 struct LinkedList
 {
+    void add(T elem)
+    {
+        auto new_node = std::make_shared<Node<T>>(elem);
+        if (!head)
+        {
+            head = new_node;
+            tail = new_node;
+            return;
+        }
+        
+        if (comparator(elem,head->data))
+        {
+            new_node->next = head;
+            head->prev = new_node;
+            head = new_node;
+            return;
+        }
+
+        if (comparator(tail->data,elem))
+        {
+            tail->next = new_node;
+            new_node->prev = tail;
+            tail = new_node;
+            return;
+        }
+
+        auto n = head;
+        auto p = head;
+        while(n)
+        {
+            if (comparator(elem,n->data))
+            {
+                new_node->next = n;
+                new_node->prev = p;
+
+                p->next = new_node;
+                n->prev = new_node;
+
+                break;
+            }
+            else if (elem == n->data)
+            {
+                n->data += elem;
+                break;
+            }
+            else
+            {
+                p = n;
+                n = n->next;
+            }
+        }
+
+        //static_cast<D*>(this)->onAdd(elem,new_node);
+    }
+
+    friend std::ostream& operator<<(std::ostream& os, const LinkedList& l)
+    {
+        auto n = l.head;
+        while(n)
+        {
+            os << n->data;
+            n=n->next;
+        }
+
+        return os;
+    }
+
+    std::vector<T> transform()
+    {
+        std::vector<T> result;
+        auto n = head;
+        while(n)
+        {
+            result.emplace_back(n->data);
+            n=n->next;
+        }
+        return result;
+    }
+
+    private:
+        C comparator{};
+        std::shared_ptr<Node<T>> head;
+        std::shared_ptr<Node<T>> tail;
+};
+
+
+
+template<typename T>
+struct OrderBids : public LinkedList<T, std::greater<T>, OrderBids<T>>
+{
+      
+
+
+};
+
+template<typename T>
+struct OrderOffers : public LinkedList<T, std::less<T>, OrderOffers<T>>
+{
+    void onAdd(const T& elem, std::shared_ptr<Node<T>> node_ptr)
+    {
+
+    }
+
 
 };
 
 
 class OrderBook {
-
-private:
-
-    template<typename Op>
-    void insert(std::unique_ptr<Node>& rr, PriceLevel pl, Op op)
-    {
-        if (!rr)
-        {
-            rr = std::make_unique<Node>(pl);
-            return;
-        } 
-
-        Node *curr = rr.get();
-        Node *prv = nullptr;
-
-        while(curr)
-        {
-            if (pl.price == curr->l.price)
-            {
-                curr->l.size += pl.size; 
-                return;
-            }
-
-            if (op(pl.price,curr->l.price))
-            {
-                break;
-            }
-            
-            prv = curr;
-            curr = curr->next.get();
-        }
-
-        auto node = std::make_unique<Node>(pl);
-        node->next.reset(curr);
-        node->prv = std::move(curr->prv);
-        if (prv)
-        {
-            prv->next = std::move(node);
-        }
-    }
-
-    void insert_bid(std::unique_ptr<Node>& rr, PriceLevel pl)
-    {
-        insert(m_bids,pl,std::greater<int>());
-    }
-
-    void insert_offer(std::unique_ptr<Node>& rr, PriceLevel pl)
-    {
-        insert(m_bids,pl,std::less<int>());
-    }
-
-private:
-    void onNewOrder(const OrderUpdate& order_update)
-    {
-        auto pl = PriceLevel(order_update.price, order_update.size);
-        if (Side::kBid == order_update.side)
-            insert_bid(m_bids,pl);
-        else
-            insert_offer(m_offers,pl);
-    }
-    void onUpdate(const OrderUpdate& order_update)
-    {
-
-    }
-    void onDelete(const OrderUpdate& order_update)
-    {
-
-    }
-    
 
 public:
 
@@ -128,15 +180,20 @@ public:
         switch (order_update.action)
         {
             case Action::kNew:
-                onNewOrder(order_update);
-                break;
+            {
+                if (order_update.side == Side::kBid)
+                    m_bids.add({order_update.price, order_update.size});
+                else
+                    m_offers.add({order_update.price, order_update.size});
+            }
+            break;
             
             case Action::kChange:
-                onUpdate(order_update);
+                
                 break;
 
             case Action::kDelete:
-                onDelete(order_update);
+                
                 break;
 
             default :
@@ -144,29 +201,19 @@ public:
         }
     }
 
-    std::vector<PriceLevel> priceLevels(Node * root)
-    {
-        std::vector<PriceLevel> r;
-        while(root)
-        {
-            r.emplace_back(root->l);
-            root = root->next.get();
-        }
-        return r;
-    }
-
     virtual std::vector<PriceLevel> Bids()
     {
-        return priceLevels(m_bids.get());
+        return m_bids.transform();
     }
+
     virtual std::vector<PriceLevel> Offers()
     {
-        return priceLevels(m_offers.get());
+         return m_offers.transform();
     }
     
 private:
-    std::unique_ptr<Node> m_bids;
-    std::unique_ptr<Node> m_offers;
+    OrderBids<PriceLevel> m_bids;
+    OrderOffers<PriceLevel> m_offers;
 
 };
 
