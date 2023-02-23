@@ -7,6 +7,7 @@
 #include <stdexcept>
 #include <memory>
 #include <cmath>
+#include <unordered_map>
 
 namespace order_book {
 
@@ -61,12 +62,99 @@ struct Node
     }
 };
 
-template<typename T, typename C, typename D>
-struct LinkedList
+template<typename T>
+struct OrderPool
 {
-    void add(T elem)
+    OrderPool(size_t size)
     {
-        auto new_node = std::make_shared<Node<T>>(elem);
+        front = std::make_shared<T>();
+        last = front;
+        for (size_t i=0; i< size; i++)
+        {
+            auto node = std::make_shared<T>();
+            attachToEnd(node);
+        }
+    }
+
+    std::shared_ptr<Node<T>>& front()
+    {
+        auto r = first;
+        first = first->next;
+        return r;
+    }
+
+    void attachToEnd(const std::shared_ptr<Node<T>>& node)
+    {
+        last->next = node;
+        last = node;
+    }
+
+    private : 
+        std::shared_ptr<Node<T>> first;
+        std::shared_ptr<Node<T>> last;
+};
+
+template<typename E, typename T>
+std::shared_ptr<Node<T>> fromE(const E& e)
+{
+    return nullptr;
+}
+
+template<>
+std::shared_ptr<Node<PriceLevel>> fromE<OrderUpdate,PriceLevel>(const OrderUpdate& order_update)
+{
+    return std::shared_ptr<Node<PriceLevel>> (new Node<PriceLevel>(PriceLevel{order_update.price,order_update.size}));
+    // TO DO
+    // Use order pool    
+}
+
+template<typename T>
+struct Key;
+
+template<>
+struct Key<OrderUpdate>
+{
+    using KeyType = decltype(OrderUpdate::order_id);
+    static const KeyType& value(const OrderUpdate& order_update) 
+    {
+        return order_update.order_id;
+    }
+};
+
+template<typename E, typename T>
+struct LinkMap
+{
+    public:
+        void add(const E& elem, const std::shared_ptr<Node<T>>& node)
+        {
+            lookup[Key<E>::value(elem)] = node;
+        }
+
+        void remove(const E& elem)
+        {
+            auto & key = Key<E>::value(elem);
+            lookup.erase(key);
+        }
+
+        std::shared_ptr<Node<T>>& lookUp(const E& elem)
+        {
+            auto & key = Key<E>::value(elem);
+            return lookup[key];
+        }
+
+    private:
+        using KeyType = typename Key<E>::KeyType;
+        std::unordered_map<KeyType, std::shared_ptr<Node<T>>> lookup;
+};
+
+template<typename E, typename T, typename C>
+struct LinkedHashMap : public LinkMap<E,T>
+{
+    void add_node(const E& elem)
+    {
+        auto new_node = fromE<E,T>(elem);
+        LinkMap<E,T>::add(elem, new_node);
+
         if (!head)
         {
             head = new_node;
@@ -74,7 +162,7 @@ struct LinkedList
             return;
         }
         
-        if (comparator(elem,head->data))
+        if (comparator(new_node->data,head->data))
         {
             new_node->next = head;
             head->prev = new_node;
@@ -82,7 +170,7 @@ struct LinkedList
             return;
         }
 
-        if (comparator(tail->data,elem))
+        if (comparator(tail->data,new_node->data))
         {
             tail->next = new_node;
             new_node->prev = tail;
@@ -94,7 +182,7 @@ struct LinkedList
         auto p = head;
         while(n)
         {
-            if (comparator(elem,n->data))
+            if (comparator(new_node->data,n->data))
             {
                 new_node->next = n;
                 new_node->prev = p;
@@ -104,9 +192,9 @@ struct LinkedList
 
                 break;
             }
-            else if (elem == n->data)
+            else if (new_node->data == n->data)
             {
-                n->data += elem;
+                n->data += new_node->data;
                 break;
             }
             else
@@ -115,11 +203,9 @@ struct LinkedList
                 n = n->next;
             }
         }
-
-        //static_cast<D*>(this)->onAdd(elem,new_node);
     }
 
-    friend std::ostream& operator<<(std::ostream& os, const LinkedList& l)
+    friend std::ostream& operator<<(std::ostream& os, const LinkedHashMap& l)
     {
         auto n = l.head;
         while(n)
@@ -143,33 +229,29 @@ struct LinkedList
         return result;
     }
 
+    void remove_node(const E& elem)
+    {
+        auto node = LinkMap<E,T>::lookUp(elem);
+        LinkMap<E,T>::remove(elem);
+
+        if (!node) return;
+        if (!node->prev) 
+        {
+            head = node->next;
+            return;
+        }
+        
+        node->prev->next = node->next;
+
+        if (node->next)
+            node->next->prev = node->prev;
+     }
+
     private:
         C comparator{};
         std::shared_ptr<Node<T>> head;
         std::shared_ptr<Node<T>> tail;
 };
-
-
-
-template<typename T>
-struct OrderBids : public LinkedList<T, std::greater<T>, OrderBids<T>>
-{
-      
-
-
-};
-
-template<typename T>
-struct OrderOffers : public LinkedList<T, std::less<T>, OrderOffers<T>>
-{
-    void onAdd(const T& elem, std::shared_ptr<Node<T>> node_ptr)
-    {
-
-    }
-
-
-};
-
 
 class OrderBook {
 
@@ -180,20 +262,34 @@ public:
         switch (order_update.action)
         {
             case Action::kNew:
-            {
-                if (order_update.side == Side::kBid)
-                    m_bids.add({order_update.price, order_update.size});
+                if ((order_update.side == Side::kBid))
+                    m_bids.add_node(order_update);
                 else
-                    m_offers.add({order_update.price, order_update.size});
-            }
-            break;
+                    m_offers.add_node(order_update);
+                break;
             
             case Action::kChange:
-                
+                if ((order_update.side == Side::kBid))
+                {
+                    m_bids.remove_node(order_update);
+                    m_bids.add_node(order_update);
+                }
+                else
+                {
+                    m_offers.remove_node(order_update);
+                    m_offers.add_node(order_update);
+                }
                 break;
 
             case Action::kDelete:
-                
+                if ((order_update.side == Side::kBid))
+                {
+                    m_bids.remove_node(order_update);
+                }
+                else
+                {
+                    m_offers.remove_node(order_update);
+                }
                 break;
 
             default :
@@ -212,9 +308,8 @@ public:
     }
     
 private:
-    OrderBids<PriceLevel> m_bids;
-    OrderOffers<PriceLevel> m_offers;
-
+    LinkedHashMap<OrderUpdate,PriceLevel, std::greater<>> m_bids;
+    LinkedHashMap<OrderUpdate,PriceLevel, std::less<>> m_offers;
 };
 
 
